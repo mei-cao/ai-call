@@ -1,0 +1,145 @@
+---
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="logo">
+        <img src="/logo.png" alt="AI Call" class="logo-img" />
+        <span>AI Call</span>
+      </a>
+      <p class="brand-tagline">Real-time call translation. Language is no longer a barrier.</p>
+    </div>
+
+    <div class="footer-links">
+      <div class="link-col">
+        <span class="col-label">Product</span>
+        <a href="#">Features</a>
+        <a href="#">Use cases</a>
+        <a href="#">Languages</a>
+        <a href="#">Changelog</a>
+      </div>
+      <div class="link-col">
+        <span class="col-label">Download</span>
+        <a href="https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone" target="_blank" rel="noopener">Google Play</a>
+      </div>
+      <div class="link-col">
+        <span class="col-label">Company</span>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p class="copyright">&copy; 2026 AI Call. All rights reserved.</p>
+      <p class="made-with">Every call, without barriers 🌍</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 24px 40px;
+    display: flex;
+    gap: 80px;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+    max-width: 260px;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .logo-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .brand-tagline {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-tertiary);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 56px;
+  }
+
+  .link-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .col-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+
+  .link-col a {
+    font-size: 14px;
+    color: var(--color-text-tertiary);
+    transition: color 0.15s;
+  }
+
+  .link-col a:hover {
+    color: var(--color-text-secondary);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-bottom-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .copyright,
+  .made-with {
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+  }
+
+  @media (max-width: 680px) {
+    .footer-inner { flex-direction: column; gap: 36px; }
+    .footer-brand { max-width: 100%; }
+    .footer-bottom-inner {
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+  }
+</style>

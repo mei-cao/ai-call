@@ -1,0 +1,193 @@
+---
+const scenes = [
+  {
+    emoji: '🛎️',
+    title: 'International customer support',
+    description: 'Call US, Japanese, or European support lines and communicate clearly — AI handles the language gap instantly.',
+    tag: 'Most popular',
+  },
+  {
+    emoji: '✈️',
+    title: 'Travel reservations',
+    description: 'Book restaurants, hotels, and tickets by phone when abroad. Communicate like a local, anywhere in the world.',
+    tag: 'Travel essential',
+  },
+  {
+    emoji: '👨‍👩‍👧',
+    title: 'Friends & family abroad',
+    description: 'Stay connected with people you care about, no matter what language they speak. Every conversation, understood.',
+    tag: '',
+  },
+  {
+    emoji: '💼',
+    title: 'International business',
+    description: 'Talk directly to overseas partners and suppliers. No professional interpreter needed — just call and communicate.',
+    tag: '',
+  },
+  {
+    emoji: '🏥',
+    title: 'Everyday errands',
+    description: 'Doctor appointments, bank inquiries, delivery tracking — handle daily tasks by phone in any unfamiliar language.',
+    tag: '',
+  },
+];
+---
+
+<section class="scenes" id="scenes">
+  <div class="scenes-inner">
+    <div class="section-header">
+      <span class="eyebrow">Use cases</span>
+      <h2 class="section-title">Every call, without barriers</h2>
+      <p class="section-sub">
+        Wherever you are, whatever language you face — AI Call has you covered.
+      </p>
+    </div>
+
+    <div class="scenes-grid">
+      {scenes.map((scene) => (
+        <div class="scene-card">
+          <div class="scene-emoji">{scene.emoji}</div>
+          <div class="scene-body">
+            <div class="scene-title-row">
+              <h3 class="scene-title">{scene.title}</h3>
+              {scene.tag && <span class="scene-tag">{scene.tag}</span>}
+            </div>
+            <p class="scene-desc">{scene.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .scenes {
+    padding: 96px 24px;
+  }
+
+  .scenes-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .section-title {
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    color: var(--color-text-primary);
+  }
+
+  .section-sub {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    max-width: 460px;
+  }
+
+  .scenes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .scene-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    cursor: default;
+  }
+
+  .scene-card:hover {
+    border-color: var(--color-accent-mid);
+    box-shadow: 0 4px 24px rgba(0, 122, 255, 0.07);
+  }
+
+  .scene-card:first-child {
+    grid-column: span 2;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .scene-emoji {
+    font-size: 32px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .scene-card:not(:first-child) .scene-emoji {
+    font-size: 28px;
+  }
+
+  .scene-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .scene-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .scene-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--color-text-primary);
+  }
+
+  .scene-tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+    padding: 2px 8px;
+    border-radius: 100px;
+  }
+
+  .scene-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 800px) {
+    .scenes-grid { grid-template-columns: 1fr 1fr; }
+    .scene-card:first-child { grid-column: span 2; }
+  }
+
+  @media (max-width: 520px) {
+    .scenes-grid { grid-template-columns: 1fr; }
+    .scene-card:first-child {
+      grid-column: span 1;
+      flex-direction: column;
+    }
+  }
+</style>

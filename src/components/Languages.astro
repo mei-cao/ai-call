@@ -1,0 +1,174 @@
+---
+const featured = [
+  { flag: '🇺🇸', name: 'English',    native: 'English' },
+  { flag: '🇨🇳', name: 'Chinese',    native: '普通话' },
+  { flag: '🇯🇵', name: 'Japanese',   native: '日本語' },
+  { flag: '🇰🇷', name: 'Korean',     native: '한국어' },
+  { flag: '🇩🇪', name: 'German',     native: 'Deutsch' },
+  { flag: '🇫🇷', name: 'French',     native: 'Français' },
+  { flag: '🇪🇸', name: 'Spanish',    native: 'Español' },
+  { flag: '🇵🇹', name: 'Portuguese', native: 'Português' },
+  { flag: '🇮🇹', name: 'Italian',    native: 'Italiano' },
+  { flag: '🇷🇺', name: 'Russian',    native: 'Русский' },
+  { flag: '🇮🇳', name: 'Hindi',      native: 'हिन्दी' },
+  { flag: '🇸🇦', name: 'Arabic',     native: 'العربية' },
+];
+---
+
+<section class="langs">
+  <div class="langs-inner">
+    <div class="section-header">
+      <span class="eyebrow">Languages</span>
+      <h2 class="section-title">100+ languages. Every corner of the world.</h2>
+      <p class="section-sub">
+        Whoever you need to reach, AI Call speaks their language.
+      </p>
+    </div>
+
+    <div class="lang-grid">
+      {featured.map((lang) => (
+        <div class="lang-card">
+          <span class="lang-flag">{lang.flag}</span>
+          <div class="lang-info">
+            <span class="lang-name">{lang.name}</span>
+            <span class="lang-native">{lang.native}</span>
+          </div>
+        </div>
+      ))}
+
+      <div class="lang-card lang-more">
+        <span class="more-count">+88</span>
+        <span class="more-label">more languages</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .langs {
+    padding: 96px 24px;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .langs-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .section-title {
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    color: var(--color-text-primary);
+  }
+
+  .section-sub {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+
+  .lang-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 16px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: border-color 0.15s, background 0.15s;
+    cursor: default;
+  }
+
+  .lang-card:hover {
+    border-color: var(--color-accent-mid);
+    background: var(--color-accent-soft);
+  }
+
+  .lang-flag {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .lang-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .lang-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  .lang-native {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .lang-more {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-style: dashed;
+    border-color: var(--color-border);
+    background: transparent;
+  }
+
+  .lang-more:hover {
+    background: var(--color-bg);
+    border-color: var(--color-text-tertiary);
+  }
+
+  .more-count {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  .more-label {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+  }
+
+  @media (max-width: 900px) { .lang-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 600px) { .lang-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 400px) { .lang-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>

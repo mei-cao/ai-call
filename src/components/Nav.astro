@@ -1,0 +1,97 @@
+---
+---
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="/logo.png" alt="AI Call" class="logo-img" />
+      <span>AI Call</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#scenes">Use cases</a></li>
+      <li><a href="#download">Download</a></li>
+    </ul>
+
+    <a href="#download" class="nav-cta">Download free</a>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 24px;
+    background: rgba(249, 249, 249, 0.88);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    flex-shrink: 0;
+  }
+
+  .logo-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 28px;
+    flex: 1;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-text-primary);
+  }
+
+  .nav-cta {
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    background: var(--color-accent);
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+    transition: opacity 0.15s;
+  }
+
+  .nav-cta:hover {
+    opacity: 0.85;
+  }
+
+  @media (max-width: 680px) {
+    .nav-links { display: none; }
+  }
+</style>
