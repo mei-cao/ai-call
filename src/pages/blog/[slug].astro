@@ -1,0 +1,909 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { posts, getPost } from '../../data/posts';
+
+export function getStaticPaths() {
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = getPost(slug!);
+
+if (!post) {
+  return Astro.redirect('/blog');
+}
+
+// Inline formatting: bold, code, links
+function inlineFormat(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+}
+
+// Parse markdown-like content into HTML
+function renderContent(content: string): string {
+  return content
+    .trim()
+    .split('\n\n')
+    .map((block) => {
+      const trimmed = block.trim();
+      if (!trimmed) return '';
+
+      // Headings
+      if (trimmed.startsWith('#### ')) return `<h4>${inlineFormat(trimmed.slice(5))}</h4>`;
+      if (trimmed.startsWith('### '))  return `<h3>${inlineFormat(trimmed.slice(4))}</h3>`;
+      if (trimmed.startsWith('## '))   return `<h2>${inlineFormat(trimmed.slice(3))}</h2>`;
+
+      // Horizontal rule
+      if (trimmed === '---') return `<hr />`;
+
+      // Markdown table (lines containing |)
+      if (trimmed.includes('|') && trimmed.split('\n').length >= 2) {
+        const lines = trimmed.split('\n').filter((l) => l.trim());
+        const isSeparator = (l: string) => /^\|[\s\-:|]+\|/.test(l);
+        if (lines.length >= 2 && isSeparator(lines[1])) {
+          const headerCells = lines[0].split('|').filter((_, i, a) => i > 0 && i < a.length - 1);
+          const header = `<tr>${headerCells.map((c) => `<th>${inlineFormat(c.trim())}</th>`).join('')}</tr>`;
+          const bodyRows = lines.slice(2).map((row) => {
+            const cells = row.split('|').filter((_, i, a) => i > 0 && i < a.length - 1);
+            return `<tr>${cells.map((c) => `<td>${inlineFormat(c.trim())}</td>`).join('')}</tr>`;
+          }).join('');
+          return `<table><thead>${header}</thead><tbody>${bodyRows}</tbody></table>`;
+        }
+      }
+
+      // Callout / tip line starting with 👉
+      if (trimmed.startsWith('👉')) {
+        return `<p class="callout">${inlineFormat(trimmed)}</p>`;
+      }
+
+      // Unordered list
+      if (trimmed.split('\n').every((l) => l.trim().startsWith('- '))) {
+        const items = trimmed.split('\n')
+          .map((li) => `<li>${inlineFormat(li.trim().slice(2))}</li>`)
+          .join('');
+        return `<ul>${items}</ul>`;
+      }
+
+      // Ordered list (lines start with "1." "2." etc.)
+      if (/^\d+\.\s/.test(trimmed.split('\n')[0])) {
+        const items = trimmed.split('\n')
+          .map((li) => `<li>${inlineFormat(li.trim().replace(/^\d+\.\s/, ''))}</li>`)
+          .join('');
+        return `<ol>${items}</ol>`;
+      }
+
+      // App comparison card (lines that start with emoji then text, block has multiple such lines)
+      if (trimmed.split('\n').length > 1 && /^[🔊🤖🧑‍⚖️📝]/.test(trimmed)) {
+        const items = trimmed.split('\n')
+          .map((li) => `<li>${inlineFormat(li.trim())}</li>`)
+          .join('');
+        return `<ul class="feature-list">${items}</ul>`;
+      }
+
+      return `<p>${inlineFormat(trimmed)}</p>`;
+    })
+    .join('\n');
+}
+
+// Build heading IDs and inject into content
+function slugify(text: string): string {
+  return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+}
+
+// Upgraded heading rendering with anchor IDs
+function renderContentWithAnchors(content: string): string {
+  return content
+    .trim()
+    .split('\n\n')
+    .map((block) => {
+      const trimmed = block.trim();
+      if (!trimmed) return '';
+
+      if (trimmed.startsWith('#### ')) {
+        const text = trimmed.slice(5);
+        const id = slugify(text);
+        return `<h4 id="${id}">${inlineFormat(text)}</h4>`;
+      }
+      if (trimmed.startsWith('### ')) {
+        const text = trimmed.slice(4);
+        const id = slugify(text);
+        return `<h3 id="${id}">${inlineFormat(text)}</h3>`;
+      }
+      if (trimmed.startsWith('## ')) {
+        const text = trimmed.slice(3);
+        const id = slugify(text);
+        return `<h2 id="${id}"><a class="heading-anchor" href="#${id}" aria-hidden="true">#</a>${inlineFormat(text)}</h2>`;
+      }
+      if (trimmed === '---') return `<hr />`;
+      if (trimmed.includes('|') && trimmed.split('\n').length >= 2) {
+        const lines = trimmed.split('\n').filter((l) => l.trim());
+        const isSeparator = (l: string) => /^\|[\s\-:|]+\|/.test(l);
+        if (lines.length >= 2 && isSeparator(lines[1])) {
+          const headerCells = lines[0].split('|').filter((_, i, a) => i > 0 && i < a.length - 1);
+          const header = `<tr>${headerCells.map((c) => `<th>${inlineFormat(c.trim())}</th>`).join('')}</tr>`;
+          const bodyRows = lines.slice(2).map((row) => {
+            const cells = row.split('|').filter((_, i, a) => i > 0 && i < a.length - 1);
+            return `<tr>${cells.map((c) => `<td>${inlineFormat(c.trim())}</td>`).join('')}</tr>`;
+          }).join('');
+          return `<table><thead>${header}</thead><tbody>${bodyRows}</tbody></table>`;
+        }
+      }
+      if (trimmed.startsWith('👉')) return `<p class="callout">${inlineFormat(trimmed)}</p>`;
+      if (trimmed.split('\n').every((l) => l.trim().startsWith('- '))) {
+        const items = trimmed.split('\n').map((li) => `<li>${inlineFormat(li.trim().slice(2))}</li>`).join('');
+        return `<ul>${items}</ul>`;
+      }
+      if (/^\d+\.\s/.test(trimmed.split('\n')[0])) {
+        const items = trimmed.split('\n').map((li) => `<li>${inlineFormat(li.trim().replace(/^\d+\.\s/, ''))}</li>`).join('');
+        return `<ol>${items}</ol>`;
+      }
+      if (trimmed.split('\n').length > 1 && /^[🔊🤖🧑‍⚖️📝]/.test(trimmed)) {
+        const items = trimmed.split('\n').map((li) => `<li>${inlineFormat(li.trim())}</li>`).join('');
+        return `<ul class="feature-list">${items}</ul>`;
+      }
+      return `<p>${inlineFormat(trimmed)}</p>`;
+    })
+    .join('\n');
+}
+
+// Extract TOC entries from content
+interface TocEntry { id: string; text: string; level: number; }
+function extractToc(content: string): TocEntry[] {
+  const entries: TocEntry[] = [];
+  content.trim().split('\n\n').forEach((block) => {
+    const t = block.trim();
+    if (t.startsWith('## ')) {
+      const text = t.slice(3).replace(/\*\*(.+?)\*\*/g, '$1');
+      entries.push({ id: slugify(text), text, level: 2 });
+    } else if (t.startsWith('### ')) {
+      const text = t.slice(4).replace(/\*\*(.+?)\*\*/g, '$1');
+      entries.push({ id: slugify(text), text, level: 3 });
+    }
+  });
+  return entries;
+}
+
+const htmlContent = renderContentWithAnchors(post.content);
+const toc = extractToc(post.content);
+const relatedPosts = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+
+const siteUrl = 'https://ai-call-kappa.vercel.app';
+const postUrl = `${siteUrl}/blog/${post.slug}`;
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      '@id': `${postUrl}#article`,
+      headline: post.title,
+      description: post.description || post.excerpt,
+      url: postUrl,
+      datePublished: post.date,
+      dateModified: post.date,
+      wordCount: post.wordCount,
+      articleSection: post.category,
+      keywords: post.tags.join(', '),
+      author: {
+        '@type': 'Organization',
+        name: 'AI Call Team',
+        url: siteUrl,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'AI Call',
+        logo: { '@type': 'ImageObject', url: `${siteUrl}/logo.png` },
+      },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+      image: { '@type': 'ImageObject', url: `${siteUrl}/logo.png` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: postUrl },
+      ],
+    },
+  ],
+};
+---
+
+<Layout
+  title={`${post.title} — AI Call Blog`}
+  description={post.description || post.excerpt}
+  ogType="article"
+  canonicalUrl={postUrl}
+  publishedDate={post.date}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+  <Nav />
+  <main class="post-main">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <div class="breadcrumb-inner">
+        <ol class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </li>
+          <li><a href="/blog">Blog</a></li>
+          <li aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </li>
+          <li aria-current="page">{post.category}</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Post header -->
+    <div class="post-header">
+      <div class="post-header-inner">
+        <div class="post-meta-row">
+          <span class="cat-tag">{post.category}</span>
+          <span class="meta-dot">·</span>
+          <time datetime={post.date} class="post-date">{post.date}</time>
+          <span class="meta-dot">·</span>
+          <span class="read-time">{post.readTime}</span>
+          {post.wordCount && <><span class="meta-dot">·</span><span class="word-count">{post.wordCount.toLocaleString()} words</span></>}
+        </div>
+        <h1 class="post-title">{post.title}</h1>
+        <p class="post-excerpt">{post.excerpt}</p>
+
+        <!-- Tags -->
+        <div class="tag-row">
+          {post.tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Body: TOC + Content -->
+    <div class="post-body">
+      <div class="post-layout">
+
+        <!-- Sidebar TOC -->
+        {toc.length >= 3 && (
+          <aside class="toc-sidebar">
+            <p class="toc-label">On this page</p>
+            <nav aria-label="Table of contents">
+              <ol class="toc-list">
+                {toc.map((entry) => (
+                  <li class={`toc-item toc-h${entry.level}`}>
+                    <a href={`#${entry.id}`}>{entry.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </aside>
+        )}
+
+        <!-- Article -->
+        <article class="post-article" itemscope itemtype="https://schema.org/Article">
+          <meta itemprop="headline" content={post.title} />
+          <meta itemprop="datePublished" content={post.date} />
+          <meta itemprop="author" content="AI Call Team" />
+
+          <div class="post-content" set:html={htmlContent} />
+
+          <!-- Share -->
+          <div class="share-row">
+            <span class="share-label">Share</span>
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(postUrl)}`}
+              target="_blank" rel="noopener" class="share-btn" aria-label="Share on X">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              X / Twitter
+            </a>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`}
+              target="_blank" rel="noopener" class="share-btn" aria-label="Share on LinkedIn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+            <button
+              class="share-btn share-copy"
+              onclick={`navigator.clipboard.writeText('${postUrl}'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy link',2000)`}
+              aria-label="Copy link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+              </svg>
+              Copy link
+            </button>
+          </div>
+
+          <!-- Author box -->
+          <div class="author-box">
+            <div class="author-avatar">
+              <img src="/logo.png" alt="AI Call Team" />
+            </div>
+            <div class="author-info">
+              <p class="author-name">AI Call Team</p>
+              <p class="author-bio">
+                We build AI-powered phone translation tools that let anyone call anyone — regardless of language. Tips, guides, and product updates from the team behind AI Call.
+              </p>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="post-cta">
+            <div class="cta-content">
+              <span class="cta-icon">📞</span>
+              <div>
+                <p class="cta-title">Try AI Call for free</p>
+                <p class="cta-sub">Call anyone in any language. No sign-up required.</p>
+              </div>
+              <div class="cta-btns">
+                <a href="https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005" target="_blank" rel="noopener" class="cta-btn cta-ios">App Store</a>
+                <a href="https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone" target="_blank" rel="noopener" class="cta-btn cta-gplay">Google Play</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- Related posts -->
+    <div class="related">
+      <div class="related-inner">
+        <h2 class="related-title">More from the blog</h2>
+        <div class="related-grid">
+          {relatedPosts.map((p) => (
+            <a href={`/blog/${p.slug}`} class="related-card">
+              <div class="related-meta">
+                <span class="cat-tag">{p.category}</span>
+                <span class="read-time">{p.readTime}</span>
+              </div>
+              <h3 class="related-post-title">{p.title}</h3>
+              <p class="related-excerpt">{p.excerpt}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .post-main { padding-top: 58px; }
+
+  /* ── Breadcrumb ── */
+  .breadcrumb {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 10px 24px;
+  }
+  .breadcrumb-inner { max-width: 1200px; margin: 0 auto; }
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    font-size: 13px;
+  }
+  .breadcrumb-list a { color: var(--color-text-secondary); transition: color 0.15s; }
+  .breadcrumb-list a:hover { color: var(--color-text-primary); }
+  .breadcrumb-list li[aria-current="page"] { color: var(--color-text-tertiary); }
+  .breadcrumb-list svg { color: var(--color-text-tertiary); }
+
+  /* ── Header ── */
+  .post-header {
+    padding: 52px 24px 48px;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .post-header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .post-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .cat-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+  .meta-dot { color: var(--color-text-tertiary); font-size: 12px; }
+  .post-date, .read-time, .word-count { font-size: 13px; color: var(--color-text-tertiary); }
+  .post-title {
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+  }
+  .post-excerpt {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+  .tag-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  /* ── Body layout ── */
+  .post-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 52px 24px 80px;
+  }
+  .post-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  /* ── TOC Sidebar ── */
+  .toc-sidebar {
+    position: sticky;
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .toc-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .toc-item a {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    display: block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .toc-item a:hover {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+  .toc-h3 a { padding-left: 18px; font-size: 12px; }
+
+  /* ── Article content ── */
+  .post-article { display: flex; flex-direction: column; gap: 40px; }
+
+  /* Article content */
+  .post-content { display: flex; flex-direction: column; gap: 0; }
+
+  .post-content :global(.heading-anchor) {
+    opacity: 0;
+    font-weight: 400;
+    color: var(--color-text-tertiary);
+    margin-right: 8px;
+    font-size: 0.85em;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .post-content :global(h2:hover .heading-anchor) { opacity: 1; }
+
+  .post-content :global(h2) {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--color-text-primary);
+    margin: 40px 0 16px;
+    line-height: 1.3;
+    scroll-margin-top: 90px;
+  }
+  .post-content :global(h2:first-child) { margin-top: 0; }
+
+  .post-content :global(p) {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+  }
+
+  .post-content :global(strong) {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .post-content :global(ul) {
+    margin: 0 0 20px;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .post-content :global(li) {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .post-content :global(li::before) {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-tertiary);
+  }
+
+  /* h3 subheadings */
+  .post-content :global(h3) {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--color-text-primary);
+    margin: 28px 0 10px;
+    scroll-margin-top: 90px;
+  }
+
+  /* h4 */
+  .post-content :global(h4) {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin: 24px 0 8px;
+  }
+
+  /* HR divider */
+  .post-content :global(hr) {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 36px 0;
+  }
+
+  /* Ordered list */
+  .post-content :global(ol) {
+    margin: 0 0 20px;
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: decimal;
+  }
+
+  .post-content :global(ol li) {
+    padding-left: 4px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+
+  .post-content :global(ol li) {
+    padding-left: 4px;
+    color: var(--color-text-secondary);
+  }
+
+  /* Feature list (emoji bullets) */
+  .post-content :global(.feature-list) {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    gap: 8px;
+  }
+
+  .post-content :global(.feature-list li) {
+    font-size: 15px;
+    padding-left: 0;
+  }
+
+  .post-content :global(.feature-list li::before) {
+    display: none;
+  }
+
+  /* Callout paragraph */
+  .post-content :global(.callout) {
+    background: var(--color-accent-soft);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 12px 16px;
+    color: var(--color-accent) !important;
+    font-size: 15px !important;
+    font-weight: 500;
+  }
+
+  .post-content :global(.callout a) {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Inline code */
+  .post-content :global(code) {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    background: var(--color-border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--color-text-primary);
+  }
+
+  /* Comparison table */
+  .post-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-bottom: 24px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .post-content :global(th) {
+    background: var(--color-surface);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+  }
+
+  .post-content :global(td) {
+    padding: 10px 14px;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border-soft);
+    vertical-align: middle;
+  }
+
+  .post-content :global(tr:last-child td) {
+    border-bottom: none;
+  }
+
+  .post-content :global(tr:nth-child(even) td) {
+    background: #fafafa;
+  }
+
+  /* ── Share row ── */
+  .share-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border);
+  }
+  .share-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-right: 4px;
+  }
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 6px 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .share-btn:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-accent-mid);
+  }
+
+  /* ── Author box ── */
+  .author-box {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+  }
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--color-accent-soft);
+  }
+  .author-avatar img { width: 100%; height: 100%; object-fit: contain; }
+  .author-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+  }
+  .author-bio {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  /* Inline CTA */
+  .post-cta {
+    background: var(--color-text-primary);
+    border-radius: var(--radius-xl);
+    padding: 32px 36px;
+  }
+
+  .cta-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .cta-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .cta-content > div:nth-child(2) {
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .cta-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 2px;
+  }
+
+  .cta-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .cta-btns {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .cta-btn {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 9px 18px;
+    border-radius: var(--radius-sm);
+    transition: opacity 0.15s;
+  }
+
+  .cta-btn:hover { opacity: 0.85; }
+
+  .cta-ios {
+    background: white;
+    color: var(--color-text-primary);
+  }
+
+  .cta-gplay {
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* Related */
+  .related {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+    padding: 64px 24px 80px;
+  }
+
+  .related-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .related-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--color-text-primary);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px 20px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: border-color 0.15s;
+    text-decoration: none;
+  }
+  .related-card:hover { border-color: var(--color-accent-mid); }
+  .related-meta { display: flex; align-items: center; justify-content: space-between; }
+  .related-post-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    line-height: 1.35;
+    color: var(--color-text-primary);
+  }
+  .related-excerpt {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .read-time { font-size: 12px; color: var(--color-text-tertiary); }
+
+  @media (max-width: 1024px) {
+    .post-layout { grid-template-columns: 1fr; }
+    .toc-sidebar { display: none; }
+    .post-body { max-width: 760px; }
+  }
+  @media (max-width: 760px) {
+    .related-grid { grid-template-columns: 1fr 1fr; }
+    .post-cta { padding: 24px; }
+    .cta-content { flex-direction: column; align-items: flex-start; }
+    .author-box { flex-direction: column; gap: 12px; }
+  }
+  @media (max-width: 520px) {
+    .related-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .related-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,447 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://ai-call-kappa.vercel.app';
+const pageUrl = `${siteUrl}/terms`;
+const lastUpdated = 'March 16, 2026';
+
+const sections = [
+  { id: 'acceptance',    title: 'Acceptance of Terms' },
+  { id: 'service',       title: 'The Service' },
+  { id: 'account',       title: 'Your Account' },
+  { id: 'acceptable-use', title: 'Acceptable Use' },
+  { id: 'subscriptions', title: 'Subscriptions & Payments' },
+  { id: 'ip',            title: 'Intellectual Property' },
+  { id: 'disclaimers',   title: 'Disclaimers' },
+  { id: 'liability',     title: 'Limitation of Liability' },
+  { id: 'termination',   title: 'Termination' },
+  { id: 'governing-law', title: 'Governing Law' },
+  { id: 'changes',       title: 'Changes to Terms' },
+  { id: 'contact',       title: 'Contact Us' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Terms of Service — AI Call',
+  url: pageUrl,
+  description: 'Terms of Service for AI Call, the real-time phone call translation app.',
+  dateModified: lastUpdated,
+  publisher: {
+    '@type': 'Organization',
+    name: 'AI Call',
+    url: siteUrl,
+  },
+};
+---
+
+<Layout
+  title="Terms of Service — AI Call"
+  description="Read the Terms of Service for AI Call. Understand your rights and responsibilities when using our real-time phone call translation app."
+  canonicalUrl={pageUrl}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Nav />
+  <main class="legal-main">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <div class="breadcrumb-inner">
+        <ol class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </li>
+          <li aria-current="page">Terms of Service</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="legal-header">
+      <div class="legal-header-inner">
+        <p class="legal-eyebrow">Legal</p>
+        <h1 class="legal-title">Terms of Service</h1>
+        <p class="legal-subtitle">Please read these terms carefully before using AI Call.</p>
+        <p class="legal-updated">Last updated: <time datetime="2026-03-16">{lastUpdated}</time></p>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="legal-body">
+      <div class="legal-layout">
+
+        <!-- TOC -->
+        <aside class="toc-sidebar">
+          <p class="toc-label">Contents</p>
+          <nav aria-label="Table of contents">
+            <ol class="toc-list">
+              {sections.map((s) => (
+                <li class="toc-item">
+                  <a href={`#${s.id}`}>{s.title}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </aside>
+
+        <!-- Content -->
+        <article class="legal-content">
+
+          <section id="acceptance">
+            <h2>Acceptance of Terms</h2>
+            <p>By downloading, installing, or using the AI Call mobile application ("App") or website ("Site"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the App or Site.</p>
+            <p>These Terms apply to all users of AI Call, including free users, subscribers, and visitors to the site. These Terms form a legally binding agreement between you and AI Call.</p>
+          </section>
+
+          <section id="service">
+            <h2>The Service</h2>
+            <p>AI Call provides a real-time phone call translation service that enables users to communicate across language barriers. The App works by processing spoken audio from both sides of a phone call and delivering translated audio in real time.</p>
+
+            <h3>Service availability</h3>
+            <p>We strive to maintain a high level of service availability, but we do not guarantee uninterrupted access. Translation quality may vary depending on language pair, audio quality, connection speed, and background noise. AI Call is a tool to assist communication — it is not a certified legal or medical interpreter.</p>
+
+            <h3>Supported languages</h3>
+            <p>AI Call currently supports 100+ languages. The list of supported languages may change over time. Some language pairs may produce higher-quality translations than others.</p>
+
+            <h3>Free and paid features</h3>
+            <p>Some features are available for free; others require a subscription. We reserve the right to change which features are free or paid at any time, with reasonable notice.</p>
+          </section>
+
+          <section id="account">
+            <h2>Your Account</h2>
+            <p>You may use limited features of AI Call without an account. To access the full service, you may be required to create an account.</p>
+            <ul>
+              <li>You are responsible for maintaining the confidentiality of your account credentials.</li>
+              <li>You must provide accurate and complete information when creating an account.</li>
+              <li>You may not share your account with others or create accounts for automated or non-human use.</li>
+              <li>You are responsible for all activity that occurs under your account.</li>
+            </ul>
+            <p>Notify us immediately at <a href="mailto:support@shaling.ai">support@shaling.ai</a> if you believe your account has been compromised.</p>
+          </section>
+
+          <section id="acceptable-use">
+            <h2>Acceptable Use</h2>
+            <p>You agree to use AI Call only for lawful purposes. You may not use the App to:</p>
+            <ul>
+              <li>Record, intercept, or store calls without the consent of all parties (where required by law)</li>
+              <li>Harass, threaten, or harm other individuals</li>
+              <li>Impersonate another person or entity</li>
+              <li>Circumvent, disable, or interfere with any security features of the App</li>
+              <li>Use the App to facilitate illegal activity, fraud, or deception</li>
+              <li>Reverse engineer, decompile, or attempt to extract source code from the App</li>
+              <li>Resell, sublicense, or redistribute the App or its translation output commercially without written permission</li>
+            </ul>
+            <p>Violation of this policy may result in immediate suspension or termination of your account.</p>
+
+            <h3>Call recording laws</h3>
+            <p>It is your responsibility to comply with applicable laws regarding call recording and monitoring in your jurisdiction. AI Call does not provide legal advice on call recording requirements.</p>
+          </section>
+
+          <section id="subscriptions">
+            <h2>Subscriptions & Payments</h2>
+
+            <h3>Billing</h3>
+            <p>Paid subscriptions are billed through Apple App Store or Google Play, depending on your platform. By subscribing, you authorize recurring charges at the frequency selected (monthly or annual).</p>
+
+            <h3>Free trials</h3>
+            <p>We may offer free trial periods. If you do not cancel before the trial ends, your chosen subscription will automatically begin and you will be charged.</p>
+
+            <h3>Cancellations and refunds</h3>
+            <p>You may cancel your subscription at any time through your App Store or Google Play account settings. Cancellation takes effect at the end of the current billing period — you will continue to have access until then. Refunds are subject to the refund policies of Apple or Google, not AI Call directly.</p>
+
+            <h3>Price changes</h3>
+            <p>We may change subscription prices with 30 days' notice. Continued use after a price change constitutes acceptance of the new price.</p>
+          </section>
+
+          <section id="ip">
+            <h2>Intellectual Property</h2>
+            <p>AI Call and all its content, features, and technology — including the App, logo, design, and translation engine — are owned by AI Call and protected by copyright, trademark, and other intellectual property laws.</p>
+
+            <h3>Your content</h3>
+            <p>You retain ownership of any content you input into AI Call (e.g., saved transcripts). By using the App, you grant AI Call a limited, non-exclusive license to process that content solely to provide the service.</p>
+
+            <h3>Feedback</h3>
+            <p>If you submit feedback, bug reports, or suggestions about the App, you grant us the right to use that feedback without compensation or attribution.</p>
+          </section>
+
+          <section id="disclaimers">
+            <h2>Disclaimers</h2>
+            <p>AI Call is provided <strong>"as is" and "as available"</strong> without warranties of any kind, express or implied.</p>
+            <ul>
+              <li>We do not warrant that translations will be accurate, complete, or suitable for any particular purpose.</li>
+              <li>We do not warrant that the App will be error-free, secure, or continuously available.</li>
+              <li>AI Call is not a substitute for professional legal, medical, or financial interpretation services.</li>
+            </ul>
+            <p>Use AI Call at your own risk. We are not responsible for any misunderstandings, errors, or consequences arising from translation inaccuracies.</p>
+          </section>
+
+          <section id="liability">
+            <h2>Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law, AI Call shall not be liable for any indirect, incidental, special, consequential, or punitive damages — including loss of data, revenue, business, or goodwill — arising from your use of the App, even if we have been advised of the possibility of such damages.</p>
+            <p>Our total liability to you for any claim arising from these Terms or your use of the App shall not exceed the amount you paid to AI Call in the 12 months preceding the claim, or $10 USD if you are a free user.</p>
+          </section>
+
+          <section id="termination">
+            <h2>Termination</h2>
+            <p>You may stop using AI Call at any time by deleting the App and your account.</p>
+            <p>We reserve the right to suspend or terminate your account, without prior notice, if you violate these Terms, engage in fraudulent activity, or if we are required to do so by law. Upon termination, your right to use the App ceases immediately.</p>
+            <p>Sections covering intellectual property, disclaimers, liability, and governing law survive termination of these Terms.</p>
+          </section>
+
+          <section id="governing-law">
+            <h2>Governing Law</h2>
+            <p>These Terms are governed by and construed in accordance with applicable law. Any disputes arising from these Terms shall be resolved through good-faith negotiation. If a dispute cannot be resolved informally, it shall be submitted to binding arbitration rather than litigation, to the extent permitted by law.</p>
+          </section>
+
+          <section id="changes">
+            <h2>Changes to Terms</h2>
+            <p>We may update these Terms from time to time. When we do, we will revise the "Last updated" date. We will notify you of significant changes through the App or via email.</p>
+            <p>Continued use of AI Call after updated Terms are posted constitutes your acceptance of the new Terms.</p>
+          </section>
+
+          <section id="contact">
+            <h2>Contact Us</h2>
+            <p>If you have questions about these Terms, please contact us:</p>
+            <div class="contact-card">
+              <div class="contact-row">
+                <span class="contact-label">Email</span>
+                <a href="mailto:support@shaling.ai">support@shaling.ai</a>
+              </div>
+              <div class="contact-row">
+                <span class="contact-label">Legal</span>
+                <a href="mailto:support@shaling.ai">support@shaling.ai</a>
+              </div>
+              <div class="contact-row">
+                <span class="contact-label">App Store</span>
+                <a href="https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005" target="_blank" rel="noopener">AI Call on App Store</a>
+              </div>
+              <div class="contact-row">
+                <span class="contact-label">Google Play</span>
+                <a href="https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone" target="_blank" rel="noopener">AI Call on Google Play</a>
+              </div>
+            </div>
+          </section>
+
+        </article>
+      </div>
+    </div>
+
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .legal-main { padding-top: 58px; }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 10px 24px;
+  }
+  .breadcrumb-inner { max-width: 1200px; margin: 0 auto; }
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    font-size: 13px;
+  }
+  .breadcrumb-list a { color: var(--color-text-secondary); transition: color 0.15s; }
+  .breadcrumb-list a:hover { color: var(--color-text-primary); }
+  .breadcrumb-list li[aria-current="page"] { color: var(--color-text-tertiary); }
+  .breadcrumb-list svg { color: var(--color-text-tertiary); }
+
+  /* Header */
+  .legal-header {
+    padding: 60px 24px 56px;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .legal-header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .legal-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .legal-title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    line-height: 1.15;
+    color: var(--color-text-primary);
+  }
+  .legal-subtitle {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+  .legal-updated {
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+    margin-top: 4px;
+  }
+
+  /* Body */
+  .legal-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 52px 24px 100px;
+  }
+  .legal-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* TOC */
+  .toc-sidebar {
+    position: sticky;
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .toc-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .toc-item a {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    display: block;
+    padding: 5px 8px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .toc-item a:hover {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+
+  /* Article */
+  .legal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 720px;
+  }
+  .legal-content section {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .legal-content section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  .legal-content h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+    scroll-margin-top: 90px;
+  }
+  .legal-content h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 24px 0 8px;
+  }
+  .legal-content p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+  }
+  .legal-content p:last-child { margin-bottom: 0; }
+  .legal-content strong {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  .legal-content a {
+    color: var(--color-accent);
+    text-underline-offset: 3px;
+  }
+  .legal-content a:hover { opacity: 0.8; }
+  .legal-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .legal-content li {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    padding-left: 18px;
+    position: relative;
+  }
+  .legal-content li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-tertiary);
+  }
+
+  /* Contact card */
+  .contact-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 14px;
+  }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-label {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+  .contact-row a {
+    color: var(--color-accent);
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 900px) {
+    .legal-layout { grid-template-columns: 1fr; }
+    .toc-sidebar { display: none; }
+    .legal-body { max-width: 720px; }
+  }
+</style>

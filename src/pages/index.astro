@@ -8,9 +8,61 @@ import Features from '../components/Features.astro';
 import Languages from '../components/Languages.astro';
 import CTA from '../components/CTA.astro';
 import Footer from '../components/Footer.astro';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://ai-call-kappa.vercel.app/#organization',
+      name: 'AI Call',
+      url: 'https://ai-call-kappa.vercel.app',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://ai-call-kappa.vercel.app/logo.png',
+      },
+      sameAs: [
+        'https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005',
+        'https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://ai-call-kappa.vercel.app/#website',
+      url: 'https://ai-call-kappa.vercel.app',
+      name: 'AI Call',
+      description: 'Real-time phone call translation app supporting 100+ languages.',
+      publisher: { '@id': 'https://ai-call-kappa.vercel.app/#organization' },
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'AI Call: Phone Translator & Agent',
+      operatingSystem: 'iOS, Android',
+      applicationCategory: 'UtilitiesApplication',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '5.0',
+        reviewCount: '54',
+        bestRating: '5',
+      },
+      description: 'Call anyone in any language. AI Call translates both sides of your phone conversation in real time across 100+ languages.',
+      url: 'https://ai-call-kappa.vercel.app',
+      downloadUrl: 'https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005',
+    },
+  ],
+};
 ---
 
-<Layout>
+<Layout
+  title="AI Call — Real-Time Phone Call Translation App"
+  description="Call anyone in any language. AI Call translates both sides of your phone call in real time across 100+ languages. Free on iOS and Android."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <Nav />
   <main>
     <Hero />

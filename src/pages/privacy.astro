@@ -1,0 +1,424 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://ai-call-kappa.vercel.app';
+const pageUrl = `${siteUrl}/privacy`;
+const lastUpdated = 'March 16, 2026';
+
+const sections = [
+  { id: 'overview',       title: 'Overview' },
+  { id: 'data-collected', title: 'Data We Collect' },
+  { id: 'how-we-use',     title: 'How We Use Your Data' },
+  { id: 'data-sharing',   title: 'Data Sharing' },
+  { id: 'retention',      title: 'Data Retention' },
+  { id: 'security',       title: 'Security' },
+  { id: 'your-rights',    title: 'Your Rights' },
+  { id: 'children',       title: "Children's Privacy" },
+  { id: 'changes',        title: 'Changes to This Policy' },
+  { id: 'contact',        title: 'Contact Us' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Privacy Policy — AI Call',
+  url: pageUrl,
+  description: 'Privacy Policy for AI Call, the real-time phone call translation app.',
+  dateModified: lastUpdated,
+  publisher: {
+    '@type': 'Organization',
+    name: 'AI Call',
+    url: siteUrl,
+  },
+};
+---
+
+<Layout
+  title="Privacy Policy — AI Call"
+  description="Learn how AI Call collects, uses, and protects your data. We are committed to your privacy and transparency."
+  canonicalUrl={pageUrl}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Nav />
+  <main class="legal-main">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <div class="breadcrumb-inner">
+        <ol class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </li>
+          <li aria-current="page">Privacy Policy</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="legal-header">
+      <div class="legal-header-inner">
+        <p class="legal-eyebrow">Legal</p>
+        <h1 class="legal-title">Privacy Policy</h1>
+        <p class="legal-subtitle">We keep things simple and honest about how we handle your data.</p>
+        <p class="legal-updated">Last updated: <time datetime="2026-03-16">{lastUpdated}</time></p>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="legal-body">
+      <div class="legal-layout">
+
+        <!-- TOC -->
+        <aside class="toc-sidebar">
+          <p class="toc-label">Contents</p>
+          <nav aria-label="Table of contents">
+            <ol class="toc-list">
+              {sections.map((s) => (
+                <li class="toc-item">
+                  <a href={`#${s.id}`}>{s.title}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </aside>
+
+        <!-- Content -->
+        <article class="legal-content">
+
+          <section id="overview">
+            <h2>Overview</h2>
+            <p>AI Call ("we", "our", or "us") is a real-time phone call translation app. This Privacy Policy explains what information we collect, why we collect it, and how you can control it.</p>
+            <p>By using AI Call, you agree to the practices described in this policy. If you do not agree, please discontinue use of the app.</p>
+          </section>
+
+          <section id="data-collected">
+            <h2>Data We Collect</h2>
+
+            <h3>Audio data</h3>
+            <p>AI Call processes audio from your phone calls to provide real-time translation. Call audio is processed in real time and is <strong>not stored permanently</strong> on our servers after the call ends unless you explicitly save a transcript.</p>
+
+            <h3>Account information</h3>
+            <p>If you create an account, we collect your email address and a display name. You may also sign in using Apple or Google, in which case we receive only the information you authorize those services to share.</p>
+
+            <h3>Usage data</h3>
+            <p>We collect anonymized data about how the app is used — such as language pairs selected, call duration, and feature interactions — to improve the service. This data cannot be used to identify you personally.</p>
+
+            <h3>Device information</h3>
+            <p>We collect basic device identifiers (operating system version, device model, app version) for crash reporting and compatibility purposes.</p>
+
+            <h3>Payment information</h3>
+            <p>If you purchase a subscription, payments are processed by Apple (App Store) or Google (Google Play). We do not store your payment card details.</p>
+          </section>
+
+          <section id="how-we-use">
+            <h2>How We Use Your Data</h2>
+            <ul>
+              <li>Provide and improve the real-time translation service</li>
+              <li>Detect and fix bugs and performance issues</li>
+              <li>Send important service updates and security notices</li>
+              <li>Personalize language preferences and call settings</li>
+              <li>Comply with legal obligations</li>
+            </ul>
+            <p>We do <strong>not</strong> sell your personal data to third parties. We do not use call audio to train AI models without your explicit consent.</p>
+          </section>
+
+          <section id="data-sharing">
+            <h2>Data Sharing</h2>
+            <p>We share data only in the following limited circumstances:</p>
+
+            <h3>Service providers</h3>
+            <p>We work with trusted third-party providers for cloud infrastructure, translation APIs, and analytics. These providers are bound by strict data processing agreements and cannot use your data for their own purposes.</p>
+
+            <h3>Legal requirements</h3>
+            <p>We may disclose information if required by law, court order, or governmental authority, or to protect the rights, property, or safety of AI Call, our users, or the public.</p>
+
+            <h3>Business transfers</h3>
+            <p>If AI Call is acquired or merged with another company, your data may be transferred as part of that transaction. We will notify you before your information is transferred and becomes subject to a different privacy policy.</p>
+          </section>
+
+          <section id="retention">
+            <h2>Data Retention</h2>
+            <p>We retain your account information for as long as your account is active. Call audio is discarded immediately after processing. Saved transcripts (if you opt in) are retained until you delete them.</p>
+            <p>You can request deletion of your account and all associated data at any time by contacting us at <a href="mailto:support@shaling.ai">support@shaling.ai</a>.</p>
+          </section>
+
+          <section id="security">
+            <h2>Security</h2>
+            <p>We use industry-standard encryption (TLS 1.3) for all data in transit. Data at rest is encrypted using AES-256. Our infrastructure is hosted on SOC 2-compliant cloud providers.</p>
+            <p>While we take security seriously, no system is completely impenetrable. If you believe your account has been compromised, contact us immediately.</p>
+          </section>
+
+          <section id="your-rights">
+            <h2>Your Rights</h2>
+            <p>Depending on your location, you may have the following rights:</p>
+
+            <h3>All users</h3>
+            <ul>
+              <li><strong>Access</strong> — request a copy of the data we hold about you</li>
+              <li><strong>Correction</strong> — update inaccurate or incomplete information</li>
+              <li><strong>Deletion</strong> — request deletion of your account and data</li>
+              <li><strong>Portability</strong> — receive your data in a structured, machine-readable format</li>
+            </ul>
+
+            <h3>EEA / UK residents (GDPR)</h3>
+            <p>You have additional rights under GDPR including the right to restrict processing, the right to object, and the right to lodge a complaint with your local supervisory authority.</p>
+
+            <h3>California residents (CCPA)</h3>
+            <p>You have the right to know what personal information is collected, to opt out of the "sale" of personal information (we do not sell your data), and to non-discrimination for exercising your rights.</p>
+
+            <p>To exercise any of these rights, email <a href="mailto:support@shaling.ai">support@shaling.ai</a>.</p>
+          </section>
+
+          <section id="children">
+            <h2>Children's Privacy</h2>
+            <p>AI Call is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us immediately and we will delete it.</p>
+          </section>
+
+          <section id="changes">
+            <h2>Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date at the top of this page. For significant changes, we will provide a more prominent notice through the app or via email.</p>
+            <p>We encourage you to review this policy periodically to stay informed about how we protect your information.</p>
+          </section>
+
+          <section id="contact">
+            <h2>Contact Us</h2>
+            <p>If you have questions about this Privacy Policy or your data, please reach out:</p>
+            <div class="contact-card">
+              <div class="contact-row">
+                <span class="contact-label">Email</span>
+                <a href="mailto:support@shaling.ai">support@shaling.ai</a>
+              </div>
+              <div class="contact-row">
+                <span class="contact-label">App Store</span>
+                <a href="https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005" target="_blank" rel="noopener">AI Call on App Store</a>
+              </div>
+              <div class="contact-row">
+                <span class="contact-label">Google Play</span>
+                <a href="https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone" target="_blank" rel="noopener">AI Call on Google Play</a>
+              </div>
+            </div>
+          </section>
+
+        </article>
+      </div>
+    </div>
+
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .legal-main { padding-top: 58px; }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 10px 24px;
+  }
+  .breadcrumb-inner { max-width: 1200px; margin: 0 auto; }
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    font-size: 13px;
+  }
+  .breadcrumb-list a { color: var(--color-text-secondary); transition: color 0.15s; }
+  .breadcrumb-list a:hover { color: var(--color-text-primary); }
+  .breadcrumb-list li[aria-current="page"] { color: var(--color-text-tertiary); }
+  .breadcrumb-list svg { color: var(--color-text-tertiary); }
+
+  /* Header */
+  .legal-header {
+    padding: 60px 24px 56px;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .legal-header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .legal-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .legal-title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    line-height: 1.15;
+    color: var(--color-text-primary);
+  }
+  .legal-subtitle {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+  .legal-updated {
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+    margin-top: 4px;
+  }
+
+  /* Body */
+  .legal-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 52px 24px 100px;
+  }
+  .legal-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* TOC */
+  .toc-sidebar {
+    position: sticky;
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .toc-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .toc-item a {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    display: block;
+    padding: 5px 8px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .toc-item a:hover {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+
+  /* Article */
+  .legal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 720px;
+  }
+  .legal-content section {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .legal-content section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  .legal-content h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+    scroll-margin-top: 90px;
+  }
+  .legal-content h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 24px 0 8px;
+  }
+  .legal-content p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+  }
+  .legal-content p:last-child { margin-bottom: 0; }
+  .legal-content strong {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  .legal-content a {
+    color: var(--color-accent);
+    text-underline-offset: 3px;
+  }
+  .legal-content a:hover { opacity: 0.8; }
+  .legal-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .legal-content li {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    padding-left: 18px;
+    position: relative;
+  }
+  .legal-content li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-tertiary);
+  }
+
+  /* Contact card */
+  .contact-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 14px;
+  }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-label {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+  .contact-row a {
+    color: var(--color-accent);
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 900px) {
+    .legal-layout { grid-template-columns: 1fr; }
+    .toc-sidebar { display: none; }
+    .legal-body { max-width: 720px; }
+  }
+</style>

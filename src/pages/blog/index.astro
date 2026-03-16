@@ -1,0 +1,267 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { posts, categories } from '../../data/posts';
+
+const featured = posts.find((p) => p.featured);
+const rest = posts.filter((p) => !p.featured);
+---
+
+<Layout
+  title="Blog — AI Call: Language, Travel & Phone Translation Tips"
+  description="Practical guides, travel tips, and real stories about making phone calls across language barriers with AI real-time translation."
+  canonicalUrl="https://ai-call-kappa.vercel.app/blog"
+>
+  <Nav />
+  <main class="blog-main">
+
+    <!-- Header -->
+    <div class="blog-header">
+      <div class="blog-header-inner">
+        <span class="eyebrow">Blog</span>
+        <h1 class="blog-title">Ideas on language,<br />calls, and connection</h1>
+        <p class="blog-sub">Tips, guides, and stories from the AI Call team.</p>
+      </div>
+    </div>
+
+    <div class="blog-body">
+
+      <!-- Featured post -->
+      {featured && (
+        <a href={`/blog/${featured.slug}`} class="featured-card">
+          <div class="featured-meta">
+            <span class="cat-tag">{featured.category}</span>
+            <span class="post-date">{featured.date}</span>
+          </div>
+          <h2 class="featured-title">{featured.title}</h2>
+          <p class="featured-excerpt">{featured.excerpt}</p>
+          <div class="featured-footer">
+            <span class="read-time">{featured.readTime}</span>
+            <span class="read-link">
+              Read article
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+      )}
+
+      <!-- Grid -->
+      <div class="posts-grid">
+        {rest.map((post) => (
+          <a href={`/blog/${post.slug}`} class="post-card">
+            <div class="post-meta">
+              <span class="cat-tag">{post.category}</span>
+              <span class="post-date">{post.date}</span>
+            </div>
+            <h3 class="post-title">{post.title}</h3>
+            <p class="post-excerpt">{post.excerpt}</p>
+            <div class="post-footer">
+              <span class="read-time">{post.readTime}</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .blog-main {
+    padding-top: 58px;
+  }
+
+  /* Header */
+  .blog-header {
+    padding: 80px 24px 64px;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .blog-header-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .blog-title {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -1.8px;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+  }
+
+  .blog-sub {
+    font-size: 17px;
+    color: var(--color-text-secondary);
+  }
+
+  /* Body */
+  .blog-body {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 52px 24px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  /* Featured card */
+  .featured-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 40px 44px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+  }
+
+  .featured-card:hover {
+    border-color: var(--color-accent-mid);
+    box-shadow: 0 4px 32px rgba(0,122,255,0.07);
+  }
+
+  .featured-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cat-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+    padding: 3px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.2px;
+  }
+
+  .post-date {
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+  }
+
+  .featured-title {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    line-height: 1.25;
+    color: var(--color-text-primary);
+    max-width: 680px;
+  }
+
+  .featured-excerpt {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    max-width: 680px;
+  }
+
+  .featured-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+  }
+
+  .read-time {
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+  }
+
+  .read-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+
+  /* Posts grid */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+  }
+
+  .post-card:hover {
+    border-color: var(--color-accent-mid);
+    box-shadow: 0 4px 24px rgba(0,122,255,0.06);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .post-title {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+    line-height: 1.35;
+    color: var(--color-text-primary);
+    flex: 1;
+  }
+
+  .post-excerpt {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    flex: 1;
+  }
+
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 8px;
+    color: var(--color-text-tertiary);
+  }
+
+  @media (max-width: 860px) {
+    .posts-grid { grid-template-columns: repeat(2, 1fr); }
+    .featured-card { padding: 28px; }
+  }
+
+  @media (max-width: 560px) {
+    .posts-grid { grid-template-columns: 1fr; }
+  }
+</style>
