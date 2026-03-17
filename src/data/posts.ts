@@ -1,3 +1,8 @@
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
 export interface Post {
   slug: string;
   title: string;
@@ -9,6 +14,7 @@ export interface Post {
   wordCount?: number;
   featured?: boolean;
   tags: string[];
+  faq?: FaqItem[];
   content: string;
 }
 
@@ -24,6 +30,11 @@ export const posts: Post[] = [
     wordCount: 520,
     featured: true,
     tags: ['AI Translation', 'Technology', 'How It Works'],
+    faq: [
+      { q: 'How does AI phone call translation work?', a: 'AI call translation works in three steps: speech recognition converts your voice to text, a neural machine translation model translates the text, and a text-to-speech engine delivers the translated audio to the other person — all in under 0.5 seconds.' },
+      { q: 'Does the other person need an app?', a: 'No. The other person receives a regular phone call. Only you need AI Call installed on your phone.' },
+      { q: 'How accurate is real-time phone call translation?', a: 'For major language pairs like English-Chinese, English-Japanese, and English-Spanish, accuracy is very high for everyday conversation. Accuracy may vary for rare language pairs or heavy technical jargon.' },
+    ],
     content: `
 Calling someone who speaks a different language used to mean hiring an interpreter, learning basic phrases, or just giving up. AI Call changes that — but how does it actually work?
 
@@ -65,6 +76,11 @@ The technology is improving every month. The version you use today is meaningful
     readTime: '4 min read',
     wordCount: 430,
     tags: ['Travel', 'Japan', 'Phone Translation'],
+    faq: [
+      { q: 'Can I call Japanese phone numbers without speaking Japanese?', a: 'Yes. With AI Call, you speak English (or your language) and the other person hears Japanese. Their Japanese replies are translated back to you in real time.' },
+      { q: 'Do Japanese businesses answer calls from foreign numbers?', a: 'Most do. Hotels, restaurants, and tourist services regularly receive international calls. Having a translator removes the language barrier entirely.' },
+      { q: 'What Japanese phrases are useful when calling?', a: 'Knowing just "Sumimasen" (excuse me) and "Eigo wa hanasemasu ka?" (do you speak English?) can help, but with AI Call you can start speaking your own language immediately.' },
+    ],
     content: `
 Japan is one of the world's most rewarding travel destinations — and one of the most challenging for non-Japanese speakers making phone calls. Many services still require calls, and English support is inconsistent outside major hotels.
 
@@ -101,6 +117,11 @@ Japan has one of the best infrastructures for a country where phone-based servic
     readTime: '6 min read',
     wordCount: 610,
     tags: ['Business', 'International', 'Productivity'],
+    faq: [
+      { q: 'How much does a professional interpreter cost?', a: 'Professional interpreters typically charge $50–$150 per hour. For regular business calls, this adds up quickly. AI Call offers a free alternative for everyday business communication.' },
+      { q: 'Can AI Call handle business and technical vocabulary?', a: 'AI Call handles general business conversation well. For highly specialized technical or legal terminology, results may vary, but for supplier negotiations, sales calls, and general meetings it performs reliably.' },
+      { q: 'Is AI Call suitable for formal business calls?', a: 'Yes. Many small business owners and solo operators use AI Call for supplier negotiations, sales calls, and client meetings across language barriers.' },
+    ],
     content: `
 For most of business history, language barriers were a filter. You either hired interpreters, relied on bilingual staff, or only worked with partners who spoke your language. AI real-time translation is changing that calculus.
 
@@ -141,6 +162,11 @@ Translation quality for highly technical or industry-specific vocabulary can var
     readTime: '4 min read',
     wordCount: 460,
     tags: ['How-to', 'Customer Service', 'Travel'],
+    faq: [
+      { q: 'How do I call an international customer service line?', a: 'Dial the international number normally through AI Call, select the language of the support agent, and speak in your own language. AI Call translates both sides of the conversation in real time.' },
+      { q: 'Will international customer service understand AI-translated speech?', a: 'Yes. AI Call delivers natural-sounding translated speech. Support agents hear a clear, fluent translation of what you said.' },
+      { q: 'What if the call has an automated phone menu (IVR)?', a: 'For automated menus, you may need to listen to the options and respond with numbers. AI Call will translate any spoken instructions from the automated system.' },
+    ],
     content: `
 International customer service calls are frustrating enough in your own language. Add a language barrier and most people give up, accept the loss, or send a slow email hoping for the best.
 
@@ -185,6 +211,10 @@ Most international support agents are experienced with non-native speakers and w
     readTime: '3 min read',
     wordCount: 380,
     tags: ['Stories', 'Family', 'Relationships'],
+    faq: [
+      { q: 'Can I use AI Call to talk to elderly relatives who speak a different language?', a: 'Yes. The person you call uses a regular phone — they do not need a smartphone or app. This makes AI Call ideal for calling grandparents or relatives who are not tech-savvy.' },
+      { q: 'Does AI Call work for personal calls, not just business?', a: 'Absolutely. AI Call works for any phone call — family, friends, medical appointments, or casual conversation. It is free to download and does not require sign-up.' },
+    ],
     content: `
 Not every call is about logistics. Some of the most important ones are just about staying close to someone.
 
@@ -223,6 +253,11 @@ Real-time translation isn't perfect. But for the kinds of conversations that mat
     readTime: '5 min read',
     wordCount: 490,
     tags: ['Languages', 'Technology', 'Translation Quality'],
+    faq: [
+      { q: 'Which languages does AI Call support best?', a: 'AI Call performs best for high-resource language pairs: English ↔ Chinese, English ↔ Japanese, English ↔ Spanish, English ↔ French, and English ↔ Korean. These have the most training data and deliver the most natural-sounding translations.' },
+      { q: 'Does AI Call support Arabic and Hindi?', a: 'Yes, both Arabic and Hindi are supported. Translation quality is good for Modern Standard Arabic and standard Hindi, though regional dialects may vary.' },
+      { q: 'How many languages does AI Call support total?', a: 'AI Call supports 100+ languages. The full list is available inside the app when you select a language for a call.' },
+    ],
     content: `
 Supporting 100+ languages is a meaningful achievement. But it's worth being honest: translation quality isn't uniform across all language pairs. Here's what you should know.
 
@@ -282,6 +317,11 @@ Translation quality improves continuously. Models are retrained regularly, and t
     wordCount: 680,
     featured: false,
     tags: ['Comparison', 'AI Tools', 'Translation', 'Apps'],
+    faq: [
+      { q: 'What is the best AI phone call translator app?', a: 'AI Call is the best dedicated real-time phone call translation app in 2025. It works on regular phone calls (the other person needs no app), supports 100+ languages, and has sub-0.5-second latency.' },
+      { q: 'Can Google Translate translate a live phone call?', a: 'Google Translate has a conversation mode but does not work on live regular phone calls. AI Call is purpose-built for real phone calls to any number.' },
+      { q: 'Is there a free phone call translator app?', a: 'Yes. AI Call is free to download on iOS and Android with no sign-up required to try. It is the leading free real-time phone call translation app.' },
+    ],
     content: `
 If you've ever needed to call someone who doesn't speak your language — a hotel in Japan, a supplier in Germany, a family member in Mexico — you've probably searched for an app that can help. There are several options. They are not equal.
 

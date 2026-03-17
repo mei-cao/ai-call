@@ -211,6 +211,14 @@ const articleJsonLd = {
         { '@type': 'ListItem', position: 3, name: post.title, item: postUrl },
       ],
     },
+    ...(post.faq && post.faq.length > 0 ? [{
+      '@type': 'FAQPage',
+      mainEntity: post.faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    }] : []),
   ],
 };
 ---
@@ -293,6 +301,26 @@ const articleJsonLd = {
           <meta itemprop="author" content="AI Call Team" />
 
           <div class="post-content" set:html={htmlContent} />
+
+          <!-- Article FAQ -->
+          {post.faq && post.faq.length > 0 && (
+            <div class="article-faq">
+              <h2 class="article-faq-title">Frequently asked questions</h2>
+              <div class="article-faq-list">
+                {post.faq.map((item) => (
+                  <details class="article-faq-item" name="article-faq">
+                    <summary class="article-faq-q">
+                      <span>{item.q}</span>
+                      <svg class="faq-chevron" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                        <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </summary>
+                    <p class="article-faq-a">{item.a}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
 
           <!-- Share -->
           <div class="share-row">
@@ -696,6 +724,64 @@ const articleJsonLd = {
 
   .post-content :global(tr:nth-child(even) td) {
     background: #fafafa;
+  }
+
+  /* ── Article FAQ ── */
+  .article-faq {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+  .article-faq-title {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--color-text-primary);
+  }
+  .article-faq-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .article-faq-item {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .article-faq-item:last-child { border-bottom: none; }
+  .article-faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .article-faq-q::-webkit-details-marker { display: none; }
+  .article-faq-q:hover { background: var(--color-bg); }
+  .faq-chevron {
+    flex-shrink: 0;
+    color: var(--color-text-tertiary);
+    transition: transform 0.2s ease;
+  }
+  details[open] .faq-chevron { transform: rotate(180deg); color: var(--color-accent); }
+  details[open] .article-faq-q { background: var(--color-bg); color: var(--color-accent); }
+  .article-faq-a {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    padding: 0 18px 14px;
+    background: var(--color-bg);
   }
 
   /* ── Share row ── */
