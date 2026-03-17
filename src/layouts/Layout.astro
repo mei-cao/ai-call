@@ -12,7 +12,7 @@ interface Props {
 const {
   title = 'AI Call — Real-Time Phone Call Translation',
   description = 'Call anyone in any language. AI Call translates both sides of your phone conversation in real time across 100+ languages. Free to download.',
-  ogImage = 'https://1aicall.com/og-default.png',
+  ogImage,
   ogType = 'website',
   canonicalUrl = Astro.url.href,
   publishedDate,
@@ -21,6 +21,7 @@ const {
 
 const siteName = 'AI Call';
 const siteUrl = 'https://1aicall.com';
+const resolvedOgImage = ogImage ?? (ogType === 'article' ? `${siteUrl}/og-blog.png` : `${siteUrl}/og-default.png`);
 ---
 
 <!doctype html>
@@ -45,7 +46,7 @@ const siteUrl = 'https://1aicall.com';
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={resolvedOgImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
@@ -56,7 +57,7 @@ const siteUrl = 'https://1aicall.com';
     <meta name="twitter:site" content="@aicallapp" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={resolvedOgImage} />
 
     <!-- Mobile / App -->
     <meta name="theme-color" content="#007aff" />

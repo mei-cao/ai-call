@@ -1,0 +1,168 @@
+---
+const faqs = [
+  {
+    q: 'Does the other person need to install AI Call?',
+    a: 'No. The other person does not need to install anything. AI Call works on your end — you simply dial their regular phone number. They hear a translated voice and can speak normally in their own language.',
+  },
+  {
+    q: 'Which languages does AI Call support?',
+    a: 'AI Call supports 100+ languages including English, Chinese (Mandarin), Japanese, Korean, Spanish, French, German, Portuguese, Arabic, Hindi, Russian, and many more. The full list is available in the app.',
+  },
+  {
+    q: 'How fast is the translation?',
+    a: 'AI Call delivers translations in under 0.5 seconds. This low latency means conversations feel natural — there is no awkward pause between what you say and when the other person hears the translation.',
+  },
+  {
+    q: 'Is AI Call free?',
+    a: 'Yes, AI Call is free to download on iOS and Android. You can start making translated calls without signing up. Some advanced features are available through an optional subscription.',
+  },
+  {
+    q: 'How does real-time call translation work?',
+    a: "When you speak, AI Call's speech recognition converts your voice to text, a neural translation model converts the text to the target language, and a text-to-speech engine delivers the translated voice to the other person — all in real time. The same process happens in reverse when they reply.",
+  },
+  {
+    q: 'Is my call audio stored or recorded?',
+    a: 'No. Call audio is processed in real time and discarded immediately after the call ends. AI Call does not store your call recordings. You can optionally save a text transcript, which you can delete at any time.',
+  },
+];
+---
+
+<section class="faq" id="faq">
+  <div class="faq-inner">
+
+    <div class="faq-header">
+      <span class="faq-eyebrow">FAQ</span>
+      <h2 class="faq-title">Common questions</h2>
+      <p class="faq-sub">Everything you need to know before your first translated call.</p>
+    </div>
+
+    <div class="faq-list">
+      {faqs.map((item, i) => (
+        <details class="faq-item" name="faq-group">
+          <summary class="faq-question">
+            <span>{item.q}</span>
+            <svg class="faq-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <p class="faq-answer">{item.a}</p>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding: 88px 24px;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .faq-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+  }
+
+  .faq-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .faq-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .faq-title {
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    color: var(--color-text-primary);
+  }
+
+  .faq-sub {
+    font-size: 16px;
+    color: var(--color-text-tertiary);
+  }
+
+  /* Accordion */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.15s;
+    user-select: none;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+
+  .faq-question:hover {
+    background: var(--color-bg);
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    color: var(--color-text-tertiary);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  details[open] .faq-question {
+    background: var(--color-bg);
+    color: var(--color-accent);
+  }
+
+  details[open] .faq-icon {
+    color: var(--color-accent);
+  }
+
+  .faq-answer {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    padding: 0 24px 20px;
+    background: var(--color-bg);
+  }
+
+  @media (max-width: 640px) {
+    .faq { padding: 64px 24px; }
+    .faq-question { padding: 18px 20px; font-size: 14px; }
+    .faq-answer { padding: 0 20px 18px; font-size: 14px; }
+  }
+</style>

@@ -1,0 +1,337 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://1aicall.com';
+const pageUrl = `${siteUrl}/about`;
+
+const stats = [
+  { value: '100+', label: 'Languages supported' },
+  { value: '50K+', label: 'Downloads worldwide' },
+  { value: '4.9★', label: 'App Store rating' },
+  { value: '<0.5s', label: 'Translation latency' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#webpage`,
+      name: 'About AI Call — Real-Time Phone Call Translation',
+      url: pageUrl,
+      description: 'Learn about AI Call and Shaling AI — the team building real-time phone call translation technology for anyone, anywhere.',
+      publisher: {
+        '@type': 'Organization',
+        name: 'AI Call',
+        url: siteUrl,
+        logo: { '@type': 'ImageObject', url: `${siteUrl}/logo.png` },
+      },
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}/#organization`,
+      name: 'Shaling AI',
+      alternateName: 'AI Call',
+      url: siteUrl,
+      logo: { '@type': 'ImageObject', url: `${siteUrl}/logo.png` },
+      foundingDate: '2024',
+      description: 'Shaling AI builds AI-powered communication tools. AI Call is our flagship product — a real-time phone call translation app that lets anyone call anyone, regardless of language.',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'support@shaling.ai',
+        contactType: 'customer support',
+      },
+      sameAs: [
+        'https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005',
+        'https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone',
+      ],
+    },
+  ],
+};
+---
+
+<Layout
+  title="About AI Call — Real-Time Phone Call Translation App"
+  description="Learn about AI Call and Shaling AI — the team building real-time phone call translation for anyone, in any language."
+  canonicalUrl={pageUrl}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Nav />
+  <main class="about-main">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <div class="breadcrumb-inner">
+        <ol class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </li>
+          <li aria-current="page">About</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="about-header">
+      <div class="about-header-inner">
+        <p class="eyebrow">About</p>
+        <h1 class="about-title">Language is no longer a barrier</h1>
+        <p class="about-subtitle">
+          AI Call is built by Shaling AI — a team on a mission to make every phone call possible, regardless of what language either person speaks.
+        </p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-strip">
+      <div class="stats-inner">
+        {stats.map((s, i) => (
+          <>
+            <div class="stat-item">
+              <span class="stat-value">{s.value}</span>
+              <span class="stat-label">{s.label}</span>
+            </div>
+            {i < stats.length - 1 && <div class="stat-divider" />}
+          </>
+        ))}
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="about-body">
+      <div class="about-content">
+
+        <section class="about-section">
+          <h2>What is AI Call?</h2>
+          <p>AI Call is a real-time phone call translation app available on iOS and Android. It lets you make and receive phone calls in your own language — while the other person hears everything translated into theirs, instantly.</p>
+          <p>The person you call does not need to install any app. AI Call works transparently on your end, over a regular phone call. It supports 100+ languages with sub-0.5-second latency, making conversations feel completely natural.</p>
+        </section>
+
+        <section class="about-section">
+          <h2>Who builds AI Call?</h2>
+          <p>AI Call is made by <strong>Shaling AI</strong>, a team focused on AI-powered communication technology. We believe that language should never be the reason a conversation doesn't happen — whether it's calling a hotel in Japan, coordinating with overseas suppliers, or staying connected with family across borders.</p>
+          <p>We launched AI Call in 2024 and have since grown to over 50,000 downloads across iOS and Android, with a 4.9-star rating on the App Store.</p>
+        </section>
+
+        <section class="about-section">
+          <h2>Our mission</h2>
+          <p>Every person on Earth should be able to call every other person on Earth, in their own language, right now. No interpreter. No language class. No barriers.</p>
+          <p>AI Call is our step toward that world.</p>
+        </section>
+
+        <section class="about-section">
+          <h2>Download AI Call</h2>
+          <p>AI Call is free to download. No sign-up required to try.</p>
+          <div class="download-row">
+            <a href="https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005" target="_blank" rel="noopener" class="dl-btn dl-ios">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              <div class="dl-text">
+                <span class="dl-sub">Download on the</span>
+                <span class="dl-main">App Store</span>
+              </div>
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone" target="_blank" rel="noopener" class="dl-btn dl-android">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.523 15.341l-.937-1.625A6.978 6.978 0 0019 9H5a6.978 6.978 0 002.414 4.716l-.937 1.625A1 1 0 007.342 17H8v4a1 1 0 001 1h1a1 1 0 001-1v-4h2v4a1 1 0 001 1h1a1 1 0 001-1v-4h.658a1 1 0 00.865-1.659zM8.5 5.5a1 1 0 110-2 1 1 0 010 2zm7 0a1 1 0 110-2 1 1 0 010 2z"/>
+              </svg>
+              <div class="dl-text">
+                <span class="dl-sub">Get it on</span>
+                <span class="dl-main">Google Play</span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <section class="about-section">
+          <h2>Contact</h2>
+          <p>Questions about AI Call, press inquiries, or partnership requests:</p>
+          <div class="contact-card">
+            <div class="contact-row">
+              <span class="contact-label">Email</span>
+              <a href="mailto:support@shaling.ai">support@shaling.ai</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-label">Company</span>
+              <span>Shaling AI</span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-label">App</span>
+              <a href="/">1aicall.com</a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .about-main { padding-top: 58px; }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 10px 24px;
+  }
+  .breadcrumb-inner { max-width: 1200px; margin: 0 auto; }
+  .breadcrumb-list { display: flex; align-items: center; gap: 6px; list-style: none; font-size: 13px; }
+  .breadcrumb-list a { color: var(--color-text-secondary); transition: color 0.15s; }
+  .breadcrumb-list a:hover { color: var(--color-text-primary); }
+  .breadcrumb-list li[aria-current="page"] { color: var(--color-text-tertiary); }
+  .breadcrumb-list svg { color: var(--color-text-tertiary); }
+
+  /* Header */
+  .about-header {
+    padding: 72px 24px 64px;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .about-header-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .about-title {
+    font-size: clamp(30px, 4.5vw, 48px);
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+  }
+  .about-subtitle {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  /* Stats */
+  .stats-strip {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    padding: 28px 24px;
+  }
+  .stats-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  .stat-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    color: var(--color-text-primary);
+    line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: var(--color-text-tertiary); }
+  .stat-divider { width: 1px; height: 36px; background: var(--color-border); flex-shrink: 0; }
+
+  /* Body */
+  .about-body {
+    padding: 64px 24px 100px;
+  }
+  .about-content {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Sections */
+  .about-section {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .about-section:last-child { border-bottom: none; margin-bottom: 0; }
+  .about-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+  }
+  .about-section p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+  }
+  .about-section p:last-child { margin-bottom: 0; }
+  .about-section strong { font-weight: 600; color: var(--color-text-primary); }
+  .about-section a { color: var(--color-accent); text-underline-offset: 3px; }
+
+  /* Download buttons */
+  .download-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+  .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    transition: opacity 0.15s;
+  }
+  .dl-btn:hover { opacity: 0.85; }
+  .dl-ios { background: var(--color-text-primary); color: white; }
+  .dl-android { background: var(--color-text-primary); color: white; }
+  .dl-text { display: flex; flex-direction: column; }
+  .dl-sub { font-size: 10px; opacity: 0.7; line-height: 1; }
+  .dl-main { font-size: 14px; font-weight: 600; line-height: 1.3; }
+
+  /* Contact card */
+  .contact-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-label { font-weight: 500; color: var(--color-text-primary); min-width: 80px; flex-shrink: 0; }
+  .contact-row a { color: var(--color-accent); text-underline-offset: 3px; }
+
+  @media (max-width: 520px) {
+    .stats-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .stat-divider { display: none; }
+    .download-row { flex-direction: column; }
+  }
+</style>

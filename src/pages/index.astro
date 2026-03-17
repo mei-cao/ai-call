@@ -6,11 +6,39 @@ import Stats from '../components/Stats.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import Features from '../components/Features.astro';
 import Testimonials from '../components/Testimonials.astro';
+import FAQ from '../components/FAQ.astro';
 import Languages from '../components/Languages.astro';
 import CTA from '../components/CTA.astro';
 import Footer from '../components/Footer.astro';
 
 const siteUrl = 'https://1aicall.com';
+
+const faqItems = [
+  {
+    q: 'Does the other person need to install AI Call?',
+    a: 'No. The other person does not need to install anything. AI Call works on your end — you simply dial their regular phone number. They hear a translated voice and can speak normally in their own language.',
+  },
+  {
+    q: 'Which languages does AI Call support?',
+    a: 'AI Call supports 100+ languages including English, Chinese (Mandarin), Japanese, Korean, Spanish, French, German, Portuguese, Arabic, Hindi, Russian, and many more.',
+  },
+  {
+    q: 'How fast is the translation?',
+    a: 'AI Call delivers translations in under 0.5 seconds, making conversations feel natural with no awkward pause.',
+  },
+  {
+    q: 'Is AI Call free?',
+    a: 'Yes, AI Call is free to download on iOS and Android. You can start making translated calls without signing up. Some advanced features are available through an optional subscription.',
+  },
+  {
+    q: 'How does real-time call translation work?',
+    a: "Speech recognition converts your voice to text, a neural translation model converts it to the target language, and text-to-speech delivers the translated voice — all in real time under 0.5 seconds.",
+  },
+  {
+    q: 'Is my call audio stored or recorded?',
+    a: 'No. Call audio is processed in real time and discarded immediately after the call ends. AI Call does not store your call recordings.',
+  },
+];
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -68,6 +96,14 @@ const jsonLd = {
       url: siteUrl,
       downloadUrl: 'https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005',
     },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
   ],
 };
 ---
@@ -92,6 +128,7 @@ const jsonLd = {
     <HowItWorks />
     <Features />
     <Testimonials />
+    <FAQ />
     <Languages />
     <CTA />
   </main>
