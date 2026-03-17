@@ -1,0 +1,452 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://1aicall.com';
+const pageUrl = `${siteUrl}/phone-call-translator`;
+
+const faqItems = [
+  {
+    q: 'What is a phone call translator?',
+    a: 'A phone call translator is an app that listens to both sides of a phone call and translates each speaker\'s voice into the other person\'s language in real time. AI Call does this automatically — you speak English, the other person hears Japanese (or any of 100+ other languages), and vice versa.',
+  },
+  {
+    q: 'Is there a free phone call translator app?',
+    a: 'Yes. AI Call is free to download on iOS and Android. You can start making real-time translated calls without creating an account. Some advanced features are available via an optional subscription.',
+  },
+  {
+    q: 'Does the other person need to install anything?',
+    a: 'No. The person you are calling receives a completely normal phone call. Only you need AI Call installed. They speak in their language and hear yours — without any app or setup on their end.',
+  },
+  {
+    q: 'How fast is real-time call translation?',
+    a: 'AI Call delivers translated speech in under 0.5 seconds — fast enough that conversations feel natural, with no awkward pauses or delays between what you say and what the other person hears.',
+  },
+  {
+    q: 'Which languages does AI Call support?',
+    a: 'AI Call supports 100+ languages including English, Mandarin Chinese, Japanese, Korean, Spanish, French, German, Portuguese, Arabic, Hindi, Russian, Italian, and many more.',
+  },
+  {
+    q: 'Can I use a phone call translator for business calls?',
+    a: 'Yes. Many users rely on AI Call for supplier negotiations, client calls, and partner meetings across language barriers. It works for any regular phone call — domestic or international.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: 'AI Call: Phone Call Translator App',
+      operatingSystem: 'iOS, Android',
+      applicationCategory: 'UtilitiesApplication',
+      description: 'AI Call is a real-time phone call translator app. It translates both sides of any phone call across 100+ languages instantly. Free on iOS and Android.',
+      url: pageUrl,
+      offers: [
+        { '@type': 'Offer', price: '0', priceCurrency: 'USD', url: 'https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005', category: 'iOS' },
+        { '@type': 'Offer', price: '0', priceCurrency: 'USD', url: 'https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone', category: 'Android' },
+      ],
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', ratingCount: '860', bestRating: '5' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+        { '@type': 'ListItem', position: 2, name: 'Phone Call Translator', item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+
+<Layout
+  title="Phone Call Translator — Real-Time AI Translation for Any Call | AI Call"
+  description="AI Call is the best free phone call translator app. It translates both sides of any phone call in real time across 100+ languages. Download free for iOS and Android."
+  canonicalUrl={pageUrl}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Nav />
+  <main class="pct-main">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <div class="bc-inner">
+        <ol class="bc-list">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </li>
+          <li aria-current="page">Phone Call Translator</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pct-hero">
+      <div class="pct-hero-inner">
+        <div class="eyebrow-tag">Free · iOS & Android · 100+ Languages</div>
+        <h1 class="pct-title">Phone Call Translator</h1>
+        <p class="pct-sub">
+          The AI-powered real-time phone call translator that lets you call anyone in any language.
+          You speak yours — they hear theirs. Both sides translated, instantly.
+        </p>
+        <div class="dl-row">
+          <a href="https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005" class="dl-btn dl-ios" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            <div class="dl-text">
+              <span class="dl-sub">Download on the</span>
+              <span class="dl-main">App Store</span>
+            </div>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone" class="dl-btn dl-android" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.523 15.341l-.937-1.625A6.978 6.978 0 0019 9H5a6.978 6.978 0 002.414 4.716l-.937 1.625A1 1 0 007.342 17H8v4a1 1 0 001 1h1a1 1 0 001-1v-4h2v4a1 1 0 001 1h1a1 1 0 001-1v-4h.658a1 1 0 00.865-1.659zM8.5 5.5a1 1 0 110-2 1 1 0 010 2zm7 0a1 1 0 110-2 1 1 0 010 2z"/>
+            </svg>
+            <div class="dl-text">
+              <span class="dl-sub">Get it on</span>
+              <span class="dl-main">Google Play</span>
+            </div>
+          </a>
+        </div>
+        <p class="trust-line">Free to download · No account required · Works with any phone number</p>
+      </div>
+    </section>
+
+    <!-- What is it -->
+    <section class="pct-section pct-what">
+      <div class="pct-section-inner">
+        <div class="what-text">
+          <h2>What is a phone call translator?</h2>
+          <p>A <strong>phone call translator</strong> is software that listens to a live phone call and translates each speaker's voice into the other person's language in real time — so both sides can understand each other without speaking the same language.</p>
+          <p>AI Call is a phone call translator app for iOS and Android. When you make a call through AI Call, your spoken words are instantly translated and delivered to the other person as natural speech in their language. Their reply is then translated back to you — all in under half a second.</p>
+          <p>Unlike text translation or chat tools, AI Call works with regular phone calls. The person you call does not need any app. They pick up their phone and hear a normal translated voice.</p>
+        </div>
+        <div class="what-stats">
+          <div class="stat-box">
+            <span class="stat-num">100+</span>
+            <span class="stat-label">Languages supported</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">&lt;0.5s</span>
+            <span class="stat-label">Translation latency</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">50K+</span>
+            <span class="stat-label">Downloads</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">4.9★</span>
+            <span class="stat-label">App Store rating</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="pct-section pct-how">
+      <div class="pct-section-inner pct-how-inner">
+        <h2>How real-time call translation works</h2>
+        <p class="section-sub">Three steps. The other person just picks up normally.</p>
+        <div class="steps">
+          <div class="step-card">
+            <span class="step-n">1</span>
+            <h3>Open AI Call and dial</h3>
+            <p>Open the app, select the language the other person speaks, and dial their regular phone number. No special setup on their end.</p>
+          </div>
+          <div class="step-sep">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="step-card">
+            <span class="step-n">2</span>
+            <h3>Speak in your language</h3>
+            <p>Talk naturally. AI instantly converts your speech to text, translates it, and delivers a natural-sounding voice to the other person in their language.</p>
+          </div>
+          <div class="step-sep">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="step-card">
+            <span class="step-n">3</span>
+            <h3>Hear their reply in yours</h3>
+            <p>When they respond, their speech is translated back to your language instantly. The full conversation flows naturally — both sides understood.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use cases -->
+    <section class="pct-section pct-usecases">
+      <div class="pct-section-inner">
+        <h2>When you need a phone call translator</h2>
+        <div class="uc-grid">
+          <div class="uc-card">
+            <span class="uc-icon">✈️</span>
+            <h3>International travel</h3>
+            <p>Book hotels, make restaurant reservations, call local services, and handle medical or emergency situations abroad — all from your phone, in English.</p>
+          </div>
+          <div class="uc-card">
+            <span class="uc-icon">💼</span>
+            <h3>Business & suppliers</h3>
+            <p>Call overseas manufacturers, negotiate with foreign clients, and coordinate with international partners directly — without hiring an interpreter.</p>
+          </div>
+          <div class="uc-card">
+            <span class="uc-icon">👨‍👩‍👧</span>
+            <h3>Family & relationships</h3>
+            <p>Stay connected with relatives who speak a different language. Have real phone conversations, not just text messages.</p>
+          </div>
+          <div class="uc-card">
+            <span class="uc-icon">🏥</span>
+            <h3>Healthcare & services</h3>
+            <p>Communicate clearly with healthcare providers, government offices, and local services when there is a language gap.</p>
+          </div>
+          <div class="uc-card">
+            <span class="uc-icon">📞</span>
+            <h3>Customer support calls</h3>
+            <p>Call international customer service lines for airlines, hotels, and tech companies — even when they only offer support in their local language.</p>
+          </div>
+          <div class="uc-card">
+            <span class="uc-icon">🎓</span>
+            <h3>Language learning</h3>
+            <p>Practice real conversations with native speakers. Use the live transcript to follow along and improve your listening in any language.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="pct-section pct-compare">
+      <div class="pct-section-inner pct-compare-inner">
+        <h2>AI Call vs other translation approaches</h2>
+        <p class="section-sub">Why a dedicated phone call translator app makes the difference.</p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Approach</th>
+                <th>Works on live calls</th>
+                <th>Other person needs app</th>
+                <th>Cost</th>
+                <th>Speed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-highlight">
+                <td><strong>AI Call</strong> <span class="badge-best">Best</span></td>
+                <td class="yes">Yes</td>
+                <td class="yes">No</td>
+                <td>Free</td>
+                <td>&lt;0.5 sec</td>
+              </tr>
+              <tr>
+                <td>Human interpreter</td>
+                <td class="yes">Yes</td>
+                <td class="no">Third party</td>
+                <td>$50–$200/hr</td>
+                <td>Slow</td>
+              </tr>
+              <tr>
+                <td>Google Translate (text)</td>
+                <td class="no">No</td>
+                <td class="no">Both need it</td>
+                <td>Free</td>
+                <td>Fast</td>
+              </tr>
+              <tr>
+                <td>Learning the language</td>
+                <td class="no">No</td>
+                <td class="yes">No</td>
+                <td>Time investment</td>
+                <td>Years</td>
+              </tr>
+              <tr>
+                <td>Messaging / chat</td>
+                <td class="no">No</td>
+                <td class="no">Both need it</td>
+                <td>Free</td>
+                <td>Fast</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pct-section pct-faq">
+      <div class="pct-section-inner pct-faq-inner">
+        <h2>Frequently asked questions</h2>
+        <div class="faq-list">
+          {faqItems.map((item) => (
+            <details class="faq-item" name="pct-faq">
+              <summary class="faq-q">
+                <span>{item.q}</span>
+                <svg class="faq-chevron" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+              <p class="faq-a">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="pct-cta">
+      <div class="pct-cta-inner">
+        <p class="cta-eyebrow">Free · No sign-up needed</p>
+        <h2 class="cta-title">Try the phone call translator free</h2>
+        <p class="cta-sub">Download AI Call and make your first translated call in minutes.</p>
+        <div class="dl-row">
+          <a href="https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005" class="dl-btn dl-ios" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            <div class="dl-text">
+              <span class="dl-sub">Download on the</span>
+              <span class="dl-main">App Store</span>
+            </div>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone" class="dl-btn dl-android-inv" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.523 15.341l-.937-1.625A6.978 6.978 0 0019 9H5a6.978 6.978 0 002.414 4.716l-.937 1.625A1 1 0 007.342 17H8v4a1 1 0 001 1h1a1 1 0 001-1v-4h2v4a1 1 0 001 1h1a1 1 0 001-1v-4h.658a1 1 0 00.865-1.659zM8.5 5.5a1 1 0 110-2 1 1 0 010 2zm7 0a1 1 0 110-2 1 1 0 010 2z"/>
+            </svg>
+            <div class="dl-text">
+              <span class="dl-sub">Get it on</span>
+              <span class="dl-main">Google Play</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .pct-main { padding-top: 58px; }
+
+  /* Breadcrumb */
+  .breadcrumb { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 10px 24px; }
+  .bc-inner { max-width: 1080px; margin: 0 auto; }
+  .bc-list { display: flex; align-items: center; gap: 6px; list-style: none; font-size: 13px; }
+  .bc-list a { color: var(--color-text-secondary); transition: color 0.15s; }
+  .bc-list a:hover { color: var(--color-text-primary); }
+  .bc-list li[aria-current="page"] { color: var(--color-text-tertiary); }
+  .bc-list svg { color: var(--color-text-tertiary); }
+
+  /* Hero */
+  .pct-hero { padding: 72px 24px 80px; background: var(--color-surface); border-bottom: 1px solid var(--color-border); text-align: center; }
+  .pct-hero-inner { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .eyebrow-tag { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--color-accent); background: var(--color-accent-soft); padding: 5px 14px; border-radius: 100px; }
+  .pct-title { font-size: clamp(40px, 6vw, 64px); font-weight: 700; letter-spacing: -2px; line-height: 1.05; color: var(--color-text-primary); }
+  .pct-sub { font-size: 18px; line-height: 1.7; color: var(--color-text-secondary); max-width: 560px; }
+  .dl-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .dl-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: var(--radius-sm); transition: opacity 0.15s; }
+  .dl-btn:hover { opacity: 0.85; }
+  .dl-ios { background: var(--color-text-primary); color: white; }
+  .dl-android { background: var(--color-surface); color: var(--color-text-primary); border: 1px solid var(--color-border); }
+  .dl-android-inv { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2); }
+  .dl-text { display: flex; flex-direction: column; }
+  .dl-sub { font-size: 10px; opacity: 0.7; line-height: 1; }
+  .dl-main { font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .trust-line { font-size: 13px; color: var(--color-text-tertiary); }
+
+  /* Sections */
+  .pct-section { padding: 80px 24px; border-bottom: 1px solid var(--color-border); }
+  .pct-section:nth-child(odd) { background: var(--color-bg); }
+  .pct-section:nth-child(even) { background: var(--color-surface); }
+  .pct-section-inner { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+  .pct-section-inner h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 700; letter-spacing: -0.8px; color: var(--color-text-primary); }
+  .section-sub { font-size: 16px; color: var(--color-text-tertiary); margin-top: -24px; }
+
+  /* What is it */
+  .pct-what-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .what-text { display: flex; flex-direction: column; gap: 16px; }
+  .what-text h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 700; letter-spacing: -0.8px; color: var(--color-text-primary); }
+  .what-text p { font-size: 16px; line-height: 1.75; color: var(--color-text-secondary); }
+  .what-text strong { color: var(--color-text-primary); font-weight: 600; }
+  .what-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 24px 20px; display: flex; flex-direction: column; gap: 6px; }
+  .stat-num { font-size: 32px; font-weight: 700; letter-spacing: -1px; color: var(--color-text-primary); line-height: 1; }
+  .stat-label { font-size: 13px; color: var(--color-text-tertiary); }
+
+  .pct-what .pct-section-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+  /* Steps */
+  .pct-how-inner { max-width: 1080px !important; }
+  .steps { display: flex; align-items: flex-start; gap: 12px; }
+  .step-card { flex: 1; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 24px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .step-n { width: 28px; height: 28px; border-radius: 50%; background: var(--color-accent-soft); color: var(--color-accent); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-card h3 { font-size: 15px; font-weight: 600; color: var(--color-text-primary); }
+  .step-card p { font-size: 14px; line-height: 1.65; color: var(--color-text-secondary); }
+  .step-sep { color: var(--color-text-tertiary); margin-top: 36px; flex-shrink: 0; }
+
+  /* Use cases */
+  .uc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .uc-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 28px 22px; display: flex; flex-direction: column; gap: 12px; }
+  .uc-icon { font-size: 28px; }
+  .uc-card h3 { font-size: 16px; font-weight: 600; color: var(--color-text-primary); }
+  .uc-card p { font-size: 14px; line-height: 1.65; color: var(--color-text-secondary); }
+
+  /* Comparison */
+  .pct-compare-inner { max-width: 900px !important; }
+  .compare-table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--color-border); }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .compare-table thead th { background: var(--color-surface); padding: 14px 16px; text-align: left; font-size: 12px; font-weight: 600; color: var(--color-text-tertiary); letter-spacing: 0.3px; border-bottom: 1px solid var(--color-border); }
+  .compare-table tbody td { padding: 14px 16px; border-bottom: 1px solid var(--color-border); color: var(--color-text-secondary); vertical-align: middle; }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+  .compare-table .yes { color: #16a34a; font-weight: 500; }
+  .compare-table .no { color: var(--color-text-tertiary); }
+  .row-highlight td { background: var(--color-accent-soft); }
+  .row-highlight td:first-child { color: var(--color-text-primary); font-weight: 600; }
+  .badge-best { font-size: 10px; font-weight: 700; background: var(--color-accent); color: white; padding: 2px 7px; border-radius: 100px; margin-left: 6px; vertical-align: middle; }
+
+  /* FAQ */
+  .pct-faq { background: var(--color-surface) !important; }
+  .pct-faq-inner { max-width: 720px !important; }
+  .faq-list { display: flex; flex-direction: column; border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; }
+  .faq-item { border-bottom: 1px solid var(--color-border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; font-size: 15px; font-weight: 500; color: var(--color-text-primary); cursor: pointer; list-style: none; user-select: none; transition: background 0.15s; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q:hover { background: var(--color-bg); }
+  .faq-chevron { flex-shrink: 0; color: var(--color-text-tertiary); transition: transform 0.2s ease; }
+  details[open] .faq-chevron { transform: rotate(180deg); color: var(--color-accent); }
+  details[open] .faq-q { background: var(--color-bg); color: var(--color-accent); }
+  .faq-a { font-size: 15px; line-height: 1.75; color: var(--color-text-secondary); padding: 0 22px 18px; background: var(--color-bg); }
+
+  /* CTA */
+  .pct-cta { background: var(--color-text-primary); padding: 80px 24px; text-align: center; }
+  .pct-cta-inner { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .cta-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .cta-title { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -1.2px; color: white; }
+  .cta-sub { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  @media (max-width: 860px) {
+    .pct-what .pct-section-inner { grid-template-columns: 1fr; }
+    .uc-grid { grid-template-columns: 1fr 1fr; }
+    .steps { flex-direction: column; }
+    .step-sep { display: none; }
+  }
+  @media (max-width: 540px) {
+    .uc-grid { grid-template-columns: 1fr; }
+    .dl-row { flex-direction: column; align-items: center; }
+    .what-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>

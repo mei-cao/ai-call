@@ -417,6 +417,182 @@ For most people — travelers, remote workers, international families, or anyone
 👉 Try AI Call today and make your international calls effortless.
     `,
   },
+  {
+    slug: 'best-free-phone-call-translator-app',
+    title: 'Best Free Phone Call Translator App in 2026 (Real-Time)',
+    description: 'Comparing the best free phone call translator apps in 2026. See which app translates live phone calls in real time, supports the most languages, and requires no setup from the other person.',
+    excerpt: 'Looking for a free phone call translator app that actually works in real time? We compare the top options in 2026 — including AI Call, Google Translate, and others — on language support, latency, and ease of use.',
+    category: 'App Reviews',
+    date: 'March 16, 2026',
+    readTime: '7 min read',
+    wordCount: 1100,
+    featured: false,
+    tags: ['phone call translator', 'free translation app', 'real-time translation', 'AI Call', 'app comparison'],
+    faq: [
+      { q: 'Is there a completely free phone call translator app?', a: 'Yes. AI Call is free to download on iOS and Android. You can make real-time translated phone calls without creating an account. Advanced features are available via an optional subscription.' },
+      { q: 'What is the best app for translating phone calls in real time?', a: 'AI Call is designed specifically for real-time phone call translation. It translates both sides of a live call in under 0.5 seconds across 100+ languages, and the other person does not need to install any app.' },
+      { q: 'Does Google Translate work for live phone calls?', a: 'Google Translate has a Conversation mode for face-to-face use, but it is not designed for live phone calls. The other person needs to use the same app, and it does not work with regular outgoing phone calls.' },
+    ],
+    content: `## What makes a phone call translator app different?
+
+Not all translation apps are designed for phone calls. Most translation tools — including Google Translate — are built for text, camera, or face-to-face conversation. A real **phone call translator app** has to solve a harder problem: translating two speakers in real time over a phone connection, where audio quality varies and latency must stay under half a second to feel natural.
+
+The key features to look for:
+
+- **Real-time translation** — The app should translate as you speak, not after you finish a sentence
+- **No setup required on the other end** — The person you call should receive a normal phone call
+- **High language coverage** — At least 50+ languages for most use cases, 100+ for international use
+- **Low latency** — Translation delay under 1 second is critical for natural conversation
+
+## Top phone call translator apps in 2026
+
+### 1. AI Call — Best overall
+
+AI Call is a dedicated phone call translator app built from the ground up for real-time two-way call translation. You dial any phone number normally, select the other person's language, and AI Call handles everything in the background.
+
+**What makes it stand out:**
+- The other person needs no app — they receive a normal call
+- Translates both sides in real time with under 0.5-second latency
+- Supports 100+ languages including all major and many regional languages
+- Free to download with no account required
+- Available on iOS and Android
+
+**Best for:** Any situation where you need to call someone who speaks a different language, whether for travel, business, family, or customer service.
+
+| Feature | AI Call |
+|---|---|
+| Live phone calls | Yes |
+| Other person needs app | No |
+| Languages | 100+ |
+| Latency | <0.5 sec |
+| Free | Yes |
+| Platforms | iOS, Android |
+
+### 2. Google Translate (Conversation mode)
+
+Google Translate includes a Conversation mode that can translate back-and-forth speech between two people. However, it requires both people to be present at the same device or both actively using the app — it does not work for standard outgoing phone calls.
+
+**Best for:** In-person conversations with someone standing next to you.
+
+### 3. iTranslate Converse
+
+iTranslate Converse is a voice translation app with a push-to-talk interface. Like Google Translate Conversation mode, it requires both speakers to use the same app and is better suited for in-person use than live phone calls.
+
+**Best for:** Face-to-face conversations when both parties can share a device.
+
+### 4. Microsoft Translator
+
+Microsoft Translator supports real-time group conversation translation via a shared session. Multiple people can join a conversation from their own devices. It works well for meetings where everyone has a smartphone, but does not translate standard outgoing phone calls to numbers.
+
+**Best for:** Multilingual team meetings where everyone can join the same digital session.
+
+## The verdict
+
+If you need to make or receive a real phone call with someone who speaks a different language — and you want the other person to just pick up their phone normally — **AI Call is the only app that works the way a phone should**.
+
+The other tools are excellent for their intended use cases (in-person conversation, meetings, text translation), but they require the other person to participate digitally. AI Call is the only solution that works with a regular phone number dial.
+
+## How to get started with AI Call
+
+1. Download AI Call free on the [App Store](https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005) or [Google Play](https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone)
+2. Open the app and select the language the other person speaks
+3. Dial their phone number
+4. Speak naturally — AI Call handles the rest`,
+  },
+  {
+    slug: 'how-to-translate-phone-calls-real-time',
+    title: 'How to Translate Phone Calls in Real Time (Step-by-Step Guide)',
+    description: 'A step-by-step guide to translating phone calls in real time using AI Call. Works for any phone number — the other person needs no app. Supports 100+ languages.',
+    excerpt: 'Want to call someone who speaks a different language? This guide shows you exactly how to translate a phone call in real time, step by step — using AI Call on iOS or Android.',
+    category: 'How-To',
+    date: 'March 16, 2026',
+    readTime: '4 min read',
+    wordCount: 750,
+    featured: false,
+    tags: ['how to translate phone calls', 'real-time call translation', 'phone call translator', 'step by step', 'AI Call'],
+    faq: [
+      { q: 'How do I translate a phone call in real time?', a: 'Download AI Call on iOS or Android. Open the app, select the language of the person you are calling, and dial their number. AI Call translates your voice into their language and their replies back to yours — all in real time during the call.' },
+      { q: 'Can I translate an incoming phone call?', a: 'Yes. AI Call can handle both outgoing and incoming translated calls. For incoming calls, you can set up AI Call to intercept and translate the conversation in real time.' },
+      { q: 'Does the other person need to do anything special?', a: 'No. The person you call receives a completely normal phone call. They do not need any app, account, or setup. Only you need AI Call installed.' },
+    ],
+    content: `## Before you start
+
+To translate a phone call in real time, you need:
+
+- A smartphone (iPhone or Android)
+- The **AI Call** app (free, available on App Store and Google Play)
+- The phone number of the person you want to call
+- To know which language they speak
+
+That's it. The other person needs nothing — no app, no account, no setup.
+
+## Step 1: Download AI Call
+
+Download AI Call free from the App Store or Google Play.
+
+- [Download for iPhone (App Store)](https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005)
+- [Download for Android (Google Play)](https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone)
+
+No account is required to start making translated calls.
+
+## Step 2: Open the app and select languages
+
+When you open AI Call:
+
+1. You will see your language on one side (e.g. English)
+2. Select the language the other person speaks on the other side (e.g. Japanese, Chinese, Spanish)
+3. AI Call supports 100+ languages — tap to search or scroll to find theirs
+
+## Step 3: Enter the phone number and call
+
+Enter the phone number of the person you want to call — exactly as you normally would, including country code for international calls.
+
+Tap the call button. AI Call places the call through your phone's network.
+
+> **The other person receives a completely normal phone call.** They pick up and hear a translated voice. They can speak in their language and you will hear it translated into yours.
+
+## Step 4: Speak naturally
+
+Once the call connects:
+
+- **Speak normally** in your language
+- AI Call detects when you are speaking, translates your words, and delivers them as natural speech to the other person — in under 0.5 seconds
+- When the other person speaks, their words are translated back to you instantly
+- A live transcript appears on your screen so you can follow along visually
+
+You do not need to pause, press buttons, or use a special speaking style. Just talk as you normally would.
+
+## Step 5: End the call normally
+
+When you are done, end the call as you normally would. AI Call does not store your call audio — the translated conversation is processed in real time and discarded when the call ends.
+
+## Tips for the best translation quality
+
+- **Speak at a normal pace** — Very fast speech or heavy background noise can affect accuracy
+- **Use a quiet environment** when possible, especially for business or important calls
+- **Check the live transcript** on screen if you are unsure you heard something correctly
+- **Select the right dialect** if available (e.g. Brazilian Portuguese vs European Portuguese, Castilian vs Latin American Spanish)
+
+## What languages can you translate phone calls into?
+
+AI Call supports 100+ languages for real-time phone call translation, including:
+
+English, Mandarin Chinese, Japanese, Korean, Spanish, French, German, Portuguese, Arabic, Hindi, Russian, Italian, Dutch, Turkish, Polish, Swedish, Danish, Norwegian, Finnish, Vietnamese, Thai, Indonesian, Malay, and many more.
+
+## Common use cases
+
+**Calling overseas customer service** — Airlines, hotels, and companies abroad often only offer support in their local language. AI Call lets you communicate clearly even when they don't speak English.
+
+**Calling family abroad** — Stay connected with parents, grandparents, or relatives who speak a different language. Have a real phone conversation instead of relying on typed messages.
+
+**Travel reservations** — Book accommodations, restaurants, and local services directly by phone when traveling abroad.
+
+**Business calls** — Speak directly with suppliers, clients, and partners in their language without scheduling an interpreter.
+
+## Start your first translated call
+
+[Download AI Call free](https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005) and make your first translated phone call in minutes. No sign-up required.`,
+  },
 ];
 
 export function getPost(slug: string): Post | undefined {
