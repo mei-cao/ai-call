@@ -1,0 +1,223 @@
+---
+const reviews = [
+  {
+    stars: 5,
+    text: "Called a Japanese hotel to change my reservation and it worked perfectly. The staff had no idea I was using a translator.",
+    name: "Sarah M.",
+    context: "Travel · Japan",
+    source: "App Store",
+  },
+  {
+    stars: 5,
+    text: "I manage suppliers in China and this has saved me thousands in interpreter fees. The latency is impressively low.",
+    name: "David K.",
+    context: "Business · Import",
+    source: "Google Play",
+  },
+  {
+    stars: 5,
+    text: "My grandmother only speaks Korean. Now I can actually have real conversations with her for the first time.",
+    name: "Jessica L.",
+    context: "Family · Korea",
+    source: "App Store",
+  },
+  {
+    stars: 5,
+    text: "Had to call a Spanish-speaking doctor's office while traveling. AI Call handled it instantly. Total lifesaver.",
+    name: "Marc T.",
+    context: "Travel · Spain",
+    source: "Google Play",
+  },
+];
+---
+
+<section class="testimonials" id="reviews">
+  <div class="testimonials-inner">
+
+    <div class="section-header">
+      <div class="rating-summary">
+        <div class="stars-row">
+          {[1,2,3,4,5].map(() => (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="star">
+              <path d="M8 1l1.854 3.756L14 5.528l-3 2.923.708 4.127L8 10.5l-3.708 1.078L5 7.451 2 4.528l4.146-.772L8 1z"/>
+            </svg>
+          ))}
+        </div>
+        <span class="rating-text">4.9 · 860 ratings</span>
+      </div>
+      <h2 class="section-title">What users say</h2>
+      <p class="section-sub">Real reviews from App Store and Google Play.</p>
+    </div>
+
+    <div class="reviews-grid">
+      {reviews.map((r) => (
+        <div class="review-card">
+          <div class="card-top">
+            <div class="card-stars">
+              {Array.from({ length: r.stars }).map(() => (
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" class="star">
+                  <path d="M8 1l1.854 3.756L14 5.528l-3 2.923.708 4.127L8 10.5l-3.708 1.078L5 7.451 2 4.528l4.146-.772L8 1z"/>
+                </svg>
+              ))}
+            </div>
+            <span class="source-badge">{r.source}</span>
+          </div>
+          <p class="review-text">"{r.text}"</p>
+          <div class="reviewer">
+            <span class="reviewer-name">{r.name}</span>
+            <span class="reviewer-context">{r.context}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    padding: 88px 24px;
+    background: var(--color-bg);
+  }
+
+  .testimonials-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+  }
+
+  /* Header */
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .rating-summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 6px 14px;
+    border-radius: 100px;
+  }
+
+  .stars-row {
+    display: flex;
+    gap: 2px;
+  }
+
+  .star {
+    color: #f5a623;
+  }
+
+  .rating-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  .section-title {
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    color: var(--color-text-primary);
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--color-text-tertiary);
+    max-width: 400px;
+  }
+
+  /* Grid */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* Card */
+  .review-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.15s;
+  }
+
+  .review-card:hover {
+    border-color: var(--color-accent-mid);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .source-badge {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .review-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    flex: 1;
+  }
+
+  .reviewer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-soft);
+  }
+
+  .reviewer-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .reviewer-context {
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+  }
+
+  .reviewer-context::before {
+    content: '·';
+    margin-right: 8px;
+    color: var(--color-text-tertiary);
+  }
+
+  @media (max-width: 640px) {
+    .reviews-grid {
+      grid-template-columns: 1fr;
+    }
+    .testimonials {
+      padding: 64px 24px;
+    }
+  }
+</style>
