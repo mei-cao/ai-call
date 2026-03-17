@@ -12,7 +12,7 @@ interface Props {
 const {
   title = 'AI Call — Real-Time Phone Call Translation',
   description = 'Call anyone in any language. AI Call translates both sides of your phone conversation in real time across 100+ languages. Free to download.',
-  ogImage = 'https://ai-call-kappa.vercel.app/og-default.png',
+  ogImage = 'https://1aicall.com/og-default.png',
   ogType = 'website',
   canonicalUrl = Astro.url.href,
   publishedDate,
@@ -20,7 +20,7 @@ const {
 } = Astro.props;
 
 const siteName = 'AI Call';
-const siteUrl = 'https://ai-call-kappa.vercel.app';
+const siteUrl = 'https://1aicall.com';
 ---
 
 <!doctype html>
@@ -65,6 +65,18 @@ const siteUrl = 'https://ai-call-kappa.vercel.app';
 
     <!-- Search engine hints -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Bing Webmaster -->
+    <meta name="msvalidate.01" content="0FE69497AB15E06E5D7DCF7A9270111A" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FW58052P9Z"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FW58052P9Z');
+    </script>
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
