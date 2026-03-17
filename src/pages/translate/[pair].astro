@@ -1,0 +1,443 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { languagePairs, getLanguagePair } from '../../data/languages';
+import { posts } from '../../data/posts';
+
+export function getStaticPaths() {
+  return languagePairs.map((lp) => ({
+    params: { pair: lp.pair },
+  }));
+}
+
+const { pair } = Astro.params;
+const lang = getLanguagePair(pair!);
+
+if (!lang) return Astro.redirect('/');
+
+const siteUrl = 'https://1aicall.com';
+const pageUrl = `${siteUrl}/translate/${lang.pair}`;
+
+const relatedPosts = posts.filter((p) => lang.relatedSlugs.includes(p.slug));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: 'AI Call: Phone Translator & Agent',
+      operatingSystem: 'iOS, Android',
+      applicationCategory: 'UtilitiesApplication',
+      offers: [
+        { '@type': 'Offer', price: '0', priceCurrency: 'USD', url: 'https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005', category: 'iOS' },
+        { '@type': 'Offer', price: '0', priceCurrency: 'USD', url: 'https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone', category: 'Android' },
+      ],
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', ratingCount: '860', bestRating: '5' },
+      description: lang.description,
+      url: pageUrl,
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: lang.faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+        { '@type': 'ListItem', position: 2, name: 'Languages', item: `${siteUrl}/#languages` },
+        { '@type': 'ListItem', position: 3, name: `${lang.from.name} ↔ ${lang.to.name}`, item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+
+<Layout
+  title={lang.title}
+  description={lang.description}
+  canonicalUrl={pageUrl}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Nav />
+  <main class="lp-main">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <div class="breadcrumb-inner">
+        <ol class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </li>
+          <li><a href="/#languages">Languages</a></li>
+          <li aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </li>
+          <li aria-current="page">{lang.from.name} ↔ {lang.to.name}</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="lp-hero">
+      <div class="lp-hero-inner">
+        <div class="lang-pair-badge">
+          <span class="pair-flag">{lang.from.flag}</span>
+          <span class="pair-name">{lang.from.name}</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="pair-name">{lang.to.name}</span>
+          <span class="pair-flag">{lang.to.flag}</span>
+        </div>
+
+        <h1 class="lp-title">{lang.heroHeadline}</h1>
+        <p class="lp-sub">{lang.heroSub}</p>
+
+        <div class="download-row">
+          <a href="https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005" class="dl-btn dl-ios" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            <div class="dl-text">
+              <span class="dl-sub">Download on the</span>
+              <span class="dl-main">App Store</span>
+            </div>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone" class="dl-btn dl-android" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.523 15.341l-.937-1.625A6.978 6.978 0 0019 9H5a6.978 6.978 0 002.414 4.716l-.937 1.625A1 1 0 007.342 17H8v4a1 1 0 001 1h1a1 1 0 001-1v-4h2v4a1 1 0 001 1h1a1 1 0 001-1v-4h.658a1 1 0 00.865-1.659zM8.5 5.5a1 1 0 110-2 1 1 0 010 2zm7 0a1 1 0 110-2 1 1 0 010 2z"/>
+            </svg>
+            <div class="dl-text">
+              <span class="dl-sub">Get it on</span>
+              <span class="dl-main">Google Play</span>
+            </div>
+          </a>
+        </div>
+        <p class="trust-note">Free to download · No sign-up required to try</p>
+      </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="lp-section lp-usecases">
+      <div class="lp-section-inner">
+        <h2 class="lp-section-title">When you need {lang.from.name} ↔ {lang.to.name} translation</h2>
+        <div class="usecases-grid">
+          {lang.useCases.map((uc) => (
+            <div class="usecase-card">
+              <span class="usecase-icon">{uc.icon}</span>
+              <h3 class="usecase-title">{uc.title}</h3>
+              <p class="usecase-desc">{uc.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="lp-section lp-how">
+      <div class="lp-section-inner">
+        <h2 class="lp-section-title">How it works</h2>
+        <p class="lp-section-sub">Three steps. Just like a normal call.</p>
+        <div class="steps-row">
+          <div class="step">
+            <span class="step-num">1</span>
+            <h3 class="step-title">Open AI Call and dial</h3>
+            <p class="step-desc">Select {lang.to.name} as the other person's language, enter their phone number, and call normally.</p>
+          </div>
+          <div class="step-arrow">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="step">
+            <span class="step-num">2</span>
+            <h3 class="step-title">Speak in {lang.from.name}</h3>
+            <p class="step-desc">Talk naturally. AI instantly translates your voice and the other person hears {lang.to.name}.</p>
+          </div>
+          <div class="step-arrow">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="step">
+            <span class="step-num">3</span>
+            <h3 class="step-title">AI translates both ways</h3>
+            <p class="step-desc">When they reply in {lang.to.name}, AI Call translates it back to {lang.from.name} for you instantly.</p>
+          </div>
+        </div>
+        <p class="how-note">The other person needs no app — any regular {lang.to.flag} phone number works.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="lp-section lp-faq">
+      <div class="lp-section-inner lp-faq-inner">
+        <h2 class="lp-section-title">Common questions</h2>
+        <div class="faq-list">
+          {lang.faq.map((item) => (
+            <details class="faq-item" name="lp-faq">
+              <summary class="faq-q">
+                <span>{item.q}</span>
+                <svg class="faq-icon" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+              <p class="faq-a">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Related posts -->
+    {relatedPosts.length > 0 && (
+      <section class="lp-section lp-related">
+        <div class="lp-section-inner">
+          <h2 class="lp-section-title">Further reading</h2>
+          <div class="related-grid">
+            {relatedPosts.map((p) => (
+              <a href={`/blog/${p.slug}`} class="related-card">
+                <span class="cat-tag">{p.category}</span>
+                <h3 class="related-title">{p.title}</h3>
+                <p class="related-excerpt">{p.excerpt}</p>
+                <span class="read-time">{p.readTime}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- CTA -->
+    <section class="lp-cta">
+      <div class="lp-cta-inner">
+        <p class="cta-eyebrow">Free · No sign-up needed</p>
+        <h2 class="cta-title">Make your first {lang.from.name} ↔ {lang.to.name} call</h2>
+        <p class="cta-sub">Download AI Call and start translating phone calls in real time.</p>
+        <div class="download-row">
+          <a href="https://apps.apple.com/us/app/ai-call-phone-translator-agent/id6744344005" class="dl-btn dl-ios" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            <div class="dl-text">
+              <span class="dl-sub">Download on the</span>
+              <span class="dl-main">App Store</span>
+            </div>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone" class="dl-btn dl-android-inv" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.523 15.341l-.937-1.625A6.978 6.978 0 0019 9H5a6.978 6.978 0 002.414 4.716l-.937 1.625A1 1 0 007.342 17H8v4a1 1 0 001 1h1a1 1 0 001-1v-4h2v4a1 1 0 001 1h1a1 1 0 001-1v-4h.658a1 1 0 00.865-1.659zM8.5 5.5a1 1 0 110-2 1 1 0 010 2zm7 0a1 1 0 110-2 1 1 0 010 2z"/>
+            </svg>
+            <div class="dl-text">
+              <span class="dl-sub">Get it on</span>
+              <span class="dl-main">Google Play</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .lp-main { padding-top: 58px; }
+
+  /* Breadcrumb */
+  .breadcrumb { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 10px 24px; }
+  .breadcrumb-inner { max-width: 1080px; margin: 0 auto; }
+  .breadcrumb-list { display: flex; align-items: center; gap: 6px; list-style: none; font-size: 13px; }
+  .breadcrumb-list a { color: var(--color-text-secondary); transition: color 0.15s; }
+  .breadcrumb-list a:hover { color: var(--color-text-primary); }
+  .breadcrumb-list li[aria-current="page"] { color: var(--color-text-tertiary); }
+  .breadcrumb-list svg { color: var(--color-text-tertiary); }
+
+  /* Hero */
+  .lp-hero {
+    padding: 72px 24px 80px;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+  }
+  .lp-hero-inner { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+  .lang-pair-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-accent-mid);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+  .pair-flag { font-size: 18px; }
+  .pair-name { font-size: 13px; font-weight: 600; }
+
+  .lp-title {
+    font-size: clamp(34px, 5vw, 56px);
+    font-weight: 700;
+    letter-spacing: -1.8px;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+    white-space: pre-line;
+  }
+  .lp-sub {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    max-width: 520px;
+  }
+
+  /* Download buttons */
+  .download-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    border-radius: var(--radius-sm);
+    transition: opacity 0.15s;
+  }
+  .dl-btn:hover { opacity: 0.85; }
+  .dl-ios { background: var(--color-text-primary); color: white; }
+  .dl-android { background: var(--color-surface); color: var(--color-text-primary); border: 1px solid var(--color-border); }
+  .dl-android-inv { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2); }
+  .dl-text { display: flex; flex-direction: column; }
+  .dl-sub { font-size: 10px; opacity: 0.7; line-height: 1; }
+  .dl-main { font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .trust-note { font-size: 13px; color: var(--color-text-tertiary); }
+
+  /* Sections */
+  .lp-section { padding: 80px 24px; border-bottom: 1px solid var(--color-border); }
+  .lp-section:nth-child(even) { background: var(--color-surface); }
+  .lp-section:nth-child(odd) { background: var(--color-bg); }
+  .lp-section-inner { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+  .lp-section-title {
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    color: var(--color-text-primary);
+  }
+  .lp-section-sub { font-size: 16px; color: var(--color-text-tertiary); margin-top: -28px; }
+
+  /* Use Cases */
+  .usecases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .usecase-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .usecase-icon { font-size: 28px; }
+  .usecase-title { font-size: 16px; font-weight: 600; color: var(--color-text-primary); letter-spacing: -0.2px; }
+  .usecase-desc { font-size: 14px; line-height: 1.65; color: var(--color-text-secondary); }
+
+  /* Steps */
+  .steps-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .step {
+    flex: 1;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-title { font-size: 15px; font-weight: 600; color: var(--color-text-primary); }
+  .step-desc { font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
+  .step-arrow { color: var(--color-text-tertiary); margin-top: 36px; flex-shrink: 0; }
+  .how-note { font-size: 14px; color: var(--color-text-tertiary); margin-top: -16px; }
+
+  /* FAQ */
+  .lp-faq { background: var(--color-surface) !important; }
+  .lp-faq-inner { max-width: 720px !important; }
+  .faq-list { display: flex; flex-direction: column; border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; }
+  .faq-item { border-bottom: 1px solid var(--color-border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q:hover { background: var(--color-bg); }
+  .faq-icon { flex-shrink: 0; color: var(--color-text-tertiary); transition: transform 0.2s ease; }
+  details[open] .faq-icon { transform: rotate(180deg); color: var(--color-accent); }
+  details[open] .faq-q { background: var(--color-bg); color: var(--color-accent); }
+  .faq-a { font-size: 15px; line-height: 1.75; color: var(--color-text-secondary); padding: 0 22px 18px; background: var(--color-bg); }
+
+  /* Related */
+  .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .related-card {
+    display: flex; flex-direction: column; gap: 10px; padding: 24px 20px;
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); text-decoration: none; transition: border-color 0.15s;
+  }
+  .related-card:hover { border-color: var(--color-accent-mid); }
+  .cat-tag { font-size: 11px; font-weight: 600; color: var(--color-accent); background: var(--color-accent-soft); padding: 3px 10px; border-radius: 100px; width: fit-content; }
+  .related-title { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.35; color: var(--color-text-primary); }
+  .related-excerpt { font-size: 13px; line-height: 1.6; color: var(--color-text-secondary); flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .read-time { font-size: 12px; color: var(--color-text-tertiary); }
+
+  /* CTA */
+  .lp-cta {
+    background: var(--color-text-primary);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .lp-cta-inner { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .cta-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .cta-title { font-size: clamp(26px, 4vw, 40px); font-weight: 700; letter-spacing: -1.2px; line-height: 1.15; color: white; }
+  .cta-sub { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  @media (max-width: 860px) {
+    .usecases-grid { grid-template-columns: 1fr; }
+    .steps-row { flex-direction: column; gap: 8px; }
+    .step-arrow { display: none; }
+    .related-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 540px) {
+    .download-row { flex-direction: column; align-items: center; }
+    .lp-hero { padding: 52px 24px 60px; }
+  }
+</style>

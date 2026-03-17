@@ -1,21 +1,21 @@
 ---
 const featured = [
-  { flag: '🇺🇸', name: 'English',    native: 'English' },
-  { flag: '🇨🇳', name: 'Chinese',    native: '普通话' },
-  { flag: '🇯🇵', name: 'Japanese',   native: '日本語' },
-  { flag: '🇰🇷', name: 'Korean',     native: '한국어' },
-  { flag: '🇩🇪', name: 'German',     native: 'Deutsch' },
-  { flag: '🇫🇷', name: 'French',     native: 'Français' },
-  { flag: '🇪🇸', name: 'Spanish',    native: 'Español' },
-  { flag: '🇵🇹', name: 'Portuguese', native: 'Português' },
-  { flag: '🇮🇹', name: 'Italian',    native: 'Italiano' },
-  { flag: '🇷🇺', name: 'Russian',    native: 'Русский' },
-  { flag: '🇮🇳', name: 'Hindi',      native: 'हिन्दी' },
-  { flag: '🇸🇦', name: 'Arabic',     native: 'العربية' },
+  { flag: '🇺🇸', name: 'English',    native: 'English',   href: null },
+  { flag: '🇨🇳', name: 'Chinese',    native: '普通话',     href: '/translate/english-chinese' },
+  { flag: '🇯🇵', name: 'Japanese',   native: '日本語',     href: '/translate/english-japanese' },
+  { flag: '🇰🇷', name: 'Korean',     native: '한국어',     href: '/translate/english-korean' },
+  { flag: '🇩🇪', name: 'German',     native: 'Deutsch',   href: '/translate/english-german' },
+  { flag: '🇫🇷', name: 'French',     native: 'Français',  href: '/translate/english-french' },
+  { flag: '🇪🇸', name: 'Spanish',    native: 'Español',   href: '/translate/english-spanish' },
+  { flag: '🇵🇹', name: 'Portuguese', native: 'Português', href: null },
+  { flag: '🇮🇹', name: 'Italian',    native: 'Italiano',  href: null },
+  { flag: '🇷🇺', name: 'Russian',    native: 'Русский',   href: null },
+  { flag: '🇮🇳', name: 'Hindi',      native: 'हिन्दी',   href: null },
+  { flag: '🇸🇦', name: 'Arabic',     native: 'العربية',   href: null },
 ];
 ---
 
-<section class="langs">
+<section class="langs" id="languages">
   <div class="langs-inner">
     <div class="section-header">
       <span class="eyebrow">Languages</span>
@@ -27,13 +27,26 @@ const featured = [
 
     <div class="lang-grid">
       {featured.map((lang) => (
-        <div class="lang-card">
-          <span class="lang-flag">{lang.flag}</span>
-          <div class="lang-info">
-            <span class="lang-name">{lang.name}</span>
-            <span class="lang-native">{lang.native}</span>
+        lang.href ? (
+          <a href={lang.href} class="lang-card lang-card-link">
+            <span class="lang-flag">{lang.flag}</span>
+            <div class="lang-info">
+              <span class="lang-name">{lang.name}</span>
+              <span class="lang-native">{lang.native}</span>
+            </div>
+            <svg class="card-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2.5 9.5l7-7M4 2.5h5.5v5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        ) : (
+          <div class="lang-card">
+            <span class="lang-flag">{lang.flag}</span>
+            <div class="lang-info">
+              <span class="lang-name">{lang.name}</span>
+              <span class="lang-native">{lang.native}</span>
+            </div>
           </div>
-        </div>
+        )
       ))}
 
       <div class="lang-card lang-more">
@@ -104,11 +117,36 @@ const featured = [
     gap: 10px;
     transition: border-color 0.15s, background 0.15s;
     cursor: default;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
   }
 
   .lang-card:hover {
     border-color: var(--color-accent-mid);
     background: var(--color-accent-soft);
+  }
+
+  .lang-card-link {
+    cursor: pointer;
+  }
+
+  .lang-card-link:hover .lang-name {
+    color: var(--color-accent);
+  }
+
+  .card-arrow {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: var(--color-text-tertiary);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .lang-card-link:hover .card-arrow {
+    opacity: 1;
+    color: var(--color-accent);
   }
 
   .lang-flag {
