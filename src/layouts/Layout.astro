@@ -1,4 +1,6 @@
 ---
+import { locales, type Locale } from '../i18n/locales';
+
 interface Props {
   title?: string;
   description?: string;
@@ -7,6 +9,8 @@ interface Props {
   canonicalUrl?: string;
   publishedDate?: string;
   author?: string;
+  lang?: Locale;
+  hreflangs?: { locale: string; url: string }[];
 }
 
 const {
@@ -17,6 +21,8 @@ const {
   canonicalUrl = Astro.url.href,
   publishedDate,
   author = 'AI Call Team',
+  lang = 'en',
+  hreflangs = [],
 } = Astro.props;
 
 const siteName = 'AI Call';
@@ -25,7 +31,7 @@ const resolvedOgImage = ogImage ?? (ogType === 'article' ? `${siteUrl}/og-blog.p
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,6 +41,10 @@ const resolvedOgImage = ogImage ?? (ogType === 'article' ? `${siteUrl}/og-blog.p
     <meta name="description" content={description} />
     <meta name="author" content={author} />
     <link rel="canonical" href={canonicalUrl} />
+    {hreflangs.map(({ locale, url }) => (
+      <link rel="alternate" hreflang={locale} href={url} />
+    ))}
+    {hreflangs.length > 0 && <link rel="alternate" hreflang="x-default" href={hreflangs.find(h => h.locale === 'en')?.url ?? canonicalUrl} />}
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/logo.png" />
