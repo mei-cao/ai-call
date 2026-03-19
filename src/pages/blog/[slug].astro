@@ -295,7 +295,7 @@ const articleJsonLd = {
         )}
 
         <!-- Article -->
-        <article class="post-article" itemscope itemtype="https://schema.org/Article">
+        <article class={`post-article${toc.length < 3 ? ' post-article-full' : ''}`} itemscope itemtype="https://schema.org/Article">
           <meta itemprop="headline" content={post.title} />
           <meta itemprop="datePublished" content={post.date} />
           <meta itemprop="author" content="AI Call Team" />
@@ -491,6 +491,13 @@ const articleJsonLd = {
     grid-template-columns: 220px 1fr;
     gap: 56px;
     align-items: start;
+  }
+  /* When no TOC sidebar, article spans full width */
+  .post-article-full {
+    grid-column: 1 / -1;
+    max-width: 760px;
+    margin: 0 auto;
+    width: 100%;
   }
 
   /* ── TOC Sidebar ── */
