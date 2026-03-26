@@ -1,0 +1,195 @@
+---
+// Pure redirect page — no Nav/Footer
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download AI Call — Real-Time Phone Translator</title>
+  <meta name="robots" content="noindex" />
+  <!-- GA4 -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-FW58052P9Z"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FW58052P9Z');
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f9f9f9;
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      color: #1a1a1a;
+      padding: 24px;
+    }
+    .card {
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    .logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      margin: 0 auto 24px;
+      display: block;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+    .btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      border: 1.5px solid #e0e0e0;
+      background: #fff;
+      color: #1a1a1a;
+    }
+    .btn:hover { opacity: 0.75; }
+    .btn-primary {
+      background: #1a1a1a;
+      color: #fff;
+      border-color: transparent;
+    }
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 2.5px solid #e0e0e0;
+      border-top-color: #1a1a1a;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .store-icon { width: 20px; height: 20px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="/logo.png" alt="AI Call" class="logo" />
+    <div class="spinner" id="spinner"></div>
+    <h1 id="title">Redirecting…</h1>
+    <p id="desc">Taking you to the right store for your device.</p>
+    <div class="btns" id="btns" style="display:none">
+      <a id="btn-ios" href="https://apps.apple.com/app/id6744344005" class="btn btn-primary">
+        <svg class="store-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on App Store
+      </a>
+      <a id="btn-android" href="https://play.google.com/store/apps/details?id=com.shaling.ai.phone.ai_phone" class="btn">
+        <svg class="store-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.22.97.15l.11-.06 10.5-10.5-2.2-2.2-9.38 12.61zM20.54 10.2l-2.98-1.72-2.45 2.45 2.45 2.45 3-1.74c.86-.5.86-1.95-.02-2.44zM2.01 1.05C1.69 1.4 1.5 1.92 1.5 2.6v18.8c0 .68.19 1.2.52 1.55l.08.08L13.08 12 2.09.97l-.08.08zM14.32 12l2.2-2.2-10.5-10.5c-.34-.19-.7-.23-1.04-.13L14.32 12z"/></svg>
+        Get it on Google Play
+      </a>
+    </div>
+  </div>
+
+  <script is:inline>
+    const IOS_URL      = "https://apps.apple.com/app/id6744344005";
+    const ANDROID_PKG  = "com.shaling.ai.phone.ai_phone";
+    const GP_WEB_URL   = "https://play.google.com/store/apps/details?id=" + ANDROID_PKG;
+    const GP_INTENT    = "intent://details?id=" + ANDROID_PKG + "#Intent;scheme=market;package=com.android.vending;end";
+
+    function qp(name) {
+      return new URLSearchParams(location.search).get(name);
+    }
+
+    function detectStore() {
+      const override = (qp('store') || '').toLowerCase();
+      if (override === 'ios') return 'ios';
+      if (override === 'android') return 'android';
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      if (/android/i.test(ua)) return 'android';
+      if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) return 'ios';
+      return 'desktop';
+    }
+
+    function sendGA4(store) {
+      var refFull = document.referrer || '';
+      var refPath = refFull.replace(/^https?:\/\/[^/]+/, '') || '(direct)';
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'store_redirect', {
+          store: store,
+          platform_detected: store,
+          utm_source: qp('utm_source'),
+          utm_medium: qp('utm_medium'),
+          utm_campaign: qp('utm_campaign'),
+          utm_term: qp('utm_term'),
+          utm_content: qp('utm_content'),
+          page_path: window.location.pathname + window.location.search,
+          page_title: document.title,
+          referrer_path: refPath
+        });
+      }
+    }
+
+    (function main() {
+      var store = detectStore();
+      sendGA4(store);
+
+      var title   = document.getElementById('title');
+      var desc    = document.getElementById('desc');
+      var spinner = document.getElementById('spinner');
+      var btns    = document.getElementById('btns');
+      var iosBtn  = document.getElementById('btn-ios');
+      var andBtn  = document.getElementById('btn-android');
+
+      iosBtn.href = IOS_URL;
+      andBtn.href = GP_WEB_URL;
+
+      if (store === 'ios') {
+        title.textContent = 'Opening App Store…';
+        desc.textContent  = 'If nothing happens, tap the button below.';
+        setTimeout(function() {
+          spinner.style.display = 'none';
+          btns.style.display = 'flex';
+          window.location.href = IOS_URL;
+        }, 800);
+      } else if (store === 'android') {
+        title.textContent = 'Opening Google Play…';
+        desc.textContent  = 'If nothing happens, tap the button below.';
+        setTimeout(function() {
+          spinner.style.display = 'none';
+          btns.style.display = 'flex';
+          var t0 = Date.now();
+          window.location.href = GP_INTENT;
+          setTimeout(function() {
+            if (Date.now() - t0 < 1500) window.location.href = GP_WEB_URL;
+          }, 700);
+        }, 800);
+      } else {
+        // Desktop — show both buttons
+        spinner.style.display = 'none';
+        title.textContent = 'Download AI Call';
+        desc.textContent  = 'Choose your platform to get started.';
+        btns.style.display = 'flex';
+      }
+    })();
+  </script>
+</body>
+</html>
