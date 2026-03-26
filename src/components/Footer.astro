@@ -1,14 +1,14 @@
 ---
 import type { Locale } from '../i18n/locales';
-interface Props { lang?: Locale; }
-const { lang = 'en' } = Astro.props;
+interface Props { lang?: Locale; siteBase?: string; }
+const { lang = 'en', siteBase = '' } = Astro.props;
 const homeHref = lang === 'en' ? '/' : `/${lang}/`;
 ---
 
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href={homeHref} class="logo">
+      <a href={`${siteBase}${homeHref}`} class="logo">
         <img src="/logo.png" alt="AI Call" class="logo-img" />
         <span>AI Call</span>
       </a>
@@ -18,18 +18,18 @@ const homeHref = lang === 'en' ? '/' : `/${lang}/`;
     <div class="footer-links">
       <div class="link-col">
         <span class="col-label">Product</span>
-        <a href="/#scenes">Use cases</a>
-        <a href="/#how">How it works</a>
+        <a href={`${siteBase}/#scenes`}>Use cases</a>
+        <a href={`${siteBase}/#how`}>How it works</a>
         <a href="https://blog.1aicall.com">Blog</a>
       </div>
       <div class="link-col">
         <span class="col-label">Language Pairs</span>
-        <a href="/translate/english-japanese">English–Japanese</a>
-        <a href="/translate/english-chinese">English–Chinese</a>
-        <a href="/translate/english-spanish">English–Spanish</a>
-        <a href="/translate/english-korean">English–Korean</a>
-        <a href="/translate/english-french">English–French</a>
-        <a href="/translate/english-german">English–German</a>
+        <a href={`${siteBase}/translate/english-japanese`}>English–Japanese</a>
+        <a href={`${siteBase}/translate/english-chinese`}>English–Chinese</a>
+        <a href={`${siteBase}/translate/english-spanish`}>English–Spanish</a>
+        <a href={`${siteBase}/translate/english-korean`}>English–Korean</a>
+        <a href={`${siteBase}/translate/english-french`}>English–French</a>
+        <a href={`${siteBase}/translate/english-german`}>English–German</a>
       </div>
       <div class="link-col">
         <span class="col-label">Download</span>
@@ -38,9 +38,9 @@ const homeHref = lang === 'en' ? '/' : `/${lang}/`;
       </div>
       <div class="link-col">
         <span class="col-label">Company</span>
-        <a href="/about">About</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
+        <a href={`${siteBase}/about`}>About</a>
+        <a href={`${siteBase}/privacy`}>Privacy</a>
+        <a href={`${siteBase}/terms`}>Terms</a>
         <a href="mailto:support@shaling.ai">Contact</a>
       </div>
     </div>

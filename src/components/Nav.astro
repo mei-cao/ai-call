@@ -3,22 +3,23 @@ import { locales, localeNames, localeFlags, type Locale } from '../i18n/locales'
 
 interface Props {
   lang?: Locale;
+  siteBase?: string;
 }
-const { lang = 'en' } = Astro.props;
+const { lang = 'en', siteBase = '' } = Astro.props;
 
 const homeHref = lang === 'en' ? '/' : `/${lang}/`;
 ---
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href={homeHref} class="logo">
+    <a href={`${siteBase}${homeHref}`} class="logo">
       <img src="/logo.png" alt="AI Call" class="logo-img" />
       <span>AI Call</span>
     </a>
 
     <ul class="nav-links">
-      <li><a href={`${homeHref}#how`}>How it works</a></li>
-      <li><a href={`${homeHref}#scenes`}>Use cases</a></li>
+      <li><a href={`${siteBase}${homeHref}#how`}>How it works</a></li>
+      <li><a href={`${siteBase}${homeHref}#scenes`}>Use cases</a></li>
       <li><a href="https://blog.1aicall.com">Blog</a></li>
     </ul>
 
@@ -35,7 +36,7 @@ const homeHref = lang === 'en' ? '/' : `/${lang}/`;
         {locales.map((l) => (
           <li role="menuitem">
             <a
-              href={l === 'en' ? '/' : `/${l}/`}
+              href={l === 'en' ? `${siteBase}/` : `${siteBase}/${l}/`}
               class={`lang-option ${l === lang ? 'lang-active' : ''}`}
             >
               <span>{localeFlags[l]}</span>

@@ -232,7 +232,7 @@ const articleJsonLd = {
   publishedDate={post.date}
 >
   <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
-  <Nav />
+  <Nav siteBase="https://1aicall.com" />
   <main class="post-main">
 
     <!-- Breadcrumb -->
@@ -405,7 +405,7 @@ const articleJsonLd = {
     </div>
 
   </main>
-  <Footer />
+  <Footer siteBase="https://1aicall.com" />
 </Layout>
 
 <style>
