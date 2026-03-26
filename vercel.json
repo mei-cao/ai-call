@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "blog.1aicall.com" }],
+      "destination": "/blog"
+    },
+    {
+      "source": "/:slug",
+      "has": [{ "type": "host", "value": "blog.1aicall.com" }],
+      "destination": "/blog/:slug"
+    }
+  ]
+}
